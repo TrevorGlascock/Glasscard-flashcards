@@ -14,7 +14,7 @@ function Decks() {
           <Deck />
         </Route>
         <Route>
-          <h1>Decks</h1>
+          <h1>Not a valid URL!</h1>
         </Route>
       </Switch>
     </>
