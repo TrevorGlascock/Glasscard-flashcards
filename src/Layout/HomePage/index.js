@@ -6,7 +6,7 @@ function HomePage({ decks }) {
   return (
     <>
       <CreateDeckBtn />
-      <DeckList decks={decks} />
+      <DeckList />
     </>
   );
 }
