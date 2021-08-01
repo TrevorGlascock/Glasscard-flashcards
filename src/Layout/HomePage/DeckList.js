@@ -11,7 +11,7 @@ function DeckList() {
     <DeckListItem key={key} deck={deck} setDecks={setDecks} />
   ));
 
-  //useEffect to load the list of decks from the API on startup
+  //Loads Decks from the API on startup
   useEffect(() => {
     const controller = new AbortController(); //to abort old requests
 
