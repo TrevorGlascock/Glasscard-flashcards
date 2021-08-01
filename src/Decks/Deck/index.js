@@ -1,15 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
-import CardList from "./CardList";
+import DeckView from "./DeckView";
 import StudyDeck from "./StudyDeck";
 import EditDeck from "./EditDeck";
 import Cards from "./Cards";
 
 function Deck() {
-  const {
-    params: { deckId },
-    path,
-  } = useRouteMatch();
+  const { path } = useRouteMatch();
   return (
     <>
       <Switch>
@@ -26,7 +23,7 @@ function Deck() {
         </Route>
 
         <Route exact path={path}>
-          <CardList />
+          <DeckView />
         </Route>
 
         <Route>

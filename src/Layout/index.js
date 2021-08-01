@@ -1,9 +1,9 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import Header from "./Header";
-import Decks from "./Decks";
 import NotFound from "./NotFound";
-import HomePage from "./HomePage";
+import HomePage from "../HomePage";
+import Decks from "../Decks";
 
 function Layout() {
   return (
