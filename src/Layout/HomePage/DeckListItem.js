@@ -1,16 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import DeleteButton from "../CommonComponents/DeleteButton";
 
 function DeckListItem({ deck }) {
   console.log(deck); //Delete this later -- For testing purposes
-
-  //Event Handler to Delete deck
-  function handleDelete() {
-    if (
-      window.confirm(`Are you sure you want to delete the "${deck.name}" Deck?`)
-    )
-      console.log("Deleting this deck!");
-  }
 
   return (
     <div className="card">
@@ -23,9 +16,7 @@ function DeckListItem({ deck }) {
         <Link to={`/decks/${deck.id}/study`}>
           <button className="btn btn-primary">Study</button>
         </Link>
-        <button className="btn btn-danger" onClick={() => handleDelete()}>
-          Delete
-        </button>
+        <DeleteButton objToDelete={deck} objType={"deck"} />
       </div>
     </div>
   );
