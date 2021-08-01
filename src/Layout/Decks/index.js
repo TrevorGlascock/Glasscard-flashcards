@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
 import Deck from "./Deck";
+import NewDeck from "./NewDeck";
 
 function Decks() {
   const { url } = useRouteMatch();
@@ -8,7 +9,7 @@ function Decks() {
     <>
       <Switch>
         <Route path={`${url}/new`}>
-          <h1>Create a new deck</h1>
+          <NewDeck />
         </Route>
         <Route path={`${url}/:deckId`}>
           <Deck />
