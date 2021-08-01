@@ -1,10 +1,11 @@
 import React from "react";
+import CreateDeckBtn from "./CreateDeckBtn";
 import DeckList from "./DeckList";
 
 function HomePage({ decks }) {
   return (
     <>
-      <h1>You are on the HomePage!</h1>
+      <CreateDeckBtn />
       <DeckList decks={decks} />
     </>
   );
