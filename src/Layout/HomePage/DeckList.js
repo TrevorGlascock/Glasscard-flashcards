@@ -3,7 +3,7 @@ import { listDecks } from "../../utils/api";
 import DeckListItem from "./DeckListItem";
 
 function DeckList() {
-  //Decks is a state variable array of each deck in the API
+  //cards is a state variable array of each deck in the API
   const [decks, setDecks] = useState([]);
 
   //map through every deck in decks to create a DeckListItem for each.
