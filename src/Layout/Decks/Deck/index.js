@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
-import CardList from "../CardList";
+import CardList from "./CardList";
 import StudyDeck from "./StudyDeck";
 import EditDeck from "./EditDeck";
 import Cards from "./Cards";
