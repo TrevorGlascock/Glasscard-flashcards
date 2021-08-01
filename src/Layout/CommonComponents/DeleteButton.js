@@ -8,7 +8,7 @@ function DeleteButton({ objToDelete, objType }) {
         `Are you sure you want to delete the "${objToDelete.name}" ${objType}?`
       )
     )
-      console.log("Deleting this deck!");
+      console.log(`Deleting this ${objType}!`);
   }
   return (
     <button className="btn btn-danger" onClick={() => handleDelete()}>

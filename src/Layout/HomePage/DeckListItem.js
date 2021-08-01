@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import DeleteButton from "../CommonComponents/DeleteButton";
 
 function DeckListItem({ deck }) {
-  console.log(deck); //Delete this later -- For testing purposes
-
   return (
     <div className="card">
       <div className="card-body">
