@@ -310,9 +310,7 @@ The Study screen has the following features:
 
 The next button appears after the card is flipped.
 
-<zoomable-image zoom-disabled="expandable &amp;&amp; !expanded" class="enabled" style="height: 152.941px;"><span class="zoomable-image-controls" ng-if="$ctrl.enabled" style=""><button class="btn-default btn-sm" ng-class="{ active: $ctrl.is100 }" ng-click="$ctrl.zoom100($event)" tooltip="Zoom 1:1 pixels" type="button">1:1</button></span></zoomable-image>
-
-<div class="zoomable-image-scrollbox" ng-transclude="" ng-dblclick="$ctrl.autoZoom($event)" tooltip="You can zoom into this image using the controls, or double-clicking on it" tooltip-position="top" scroll-on-drag="$ctrl.enabled &amp;&amp; $ctrl.zoomed" tabindex="0">![Study after first card is flipped](https://res.cloudinary.com/strive/image/upload/w_1000,h_1000,c_limit/5a7d4b1050a592638fc1cf0df3f10cd0-rst-card-flipped.png)</div>
+![Study after first card is flipped](https://res.cloudinary.com/strive/image/upload/w_1000,h_1000,c_limit/5a7d4b1050a592638fc1cf0df3f10cd0-rst-card-flipped.png)</div>
 
 #### Restart prompt
 
