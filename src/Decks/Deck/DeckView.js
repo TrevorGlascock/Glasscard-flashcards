@@ -5,6 +5,7 @@ import Breadcrumb from "../../CommonComponents/Breadcrumb";
 import DeleteButton from "../../CommonComponents/DeleteButton";
 import EditButton from "../../CommonComponents/EditButton";
 import StudyButton from "../../CommonComponents/StudyButton";
+import LoadingMessage from "../../CommonComponents/LoadingMessage";
 import CardList from "./CardList";
 
 function DeckView({ deck, setCards }) {
@@ -23,7 +24,7 @@ function DeckView({ deck, setCards }) {
       <CardList cards={deck.cards} setCards={setCards} />
     </>
   ) : (
-    <h1>Now Loading...</h1>
+    <LoadingMessage />
   );
 }
 
