@@ -15,7 +15,7 @@ function DeckView({ deck, setCards }) {
   // console.log(deck.cards);
   return deck?.cards ? (
     <>
-      <Breadcrumb />
+      <Breadcrumb navPath={[deck.name]} />
       <h3>{deckId}'s name goes here</h3>
       <div>
         <EditButton path={url} />
