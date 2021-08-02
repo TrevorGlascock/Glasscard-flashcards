@@ -11,11 +11,11 @@ function DeckList() {
     <DeckListItem key={key} deck={deck} setDecks={setDecks} />
   ));
 
-  //Loads Decks from the API on startup
+  //Loads the list of Decks from the API on startup
   useEffect(() => {
     const controller = new AbortController(); //to abort old requests
 
-    //Utility function that takes an AbortController signal and makes an API call to {API_BASE_URL}/decks?_embed=cards
+    //API call to {API_BASE_URL}/decks?_embed=cards
     listDecks(controller.signal)
       .then(setDecks)
       .catch((error) => {

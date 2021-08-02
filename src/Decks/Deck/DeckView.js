@@ -3,9 +3,10 @@ import { useParams } from "react-router-dom";
 import DeleteButton from "../../CommonComponents/DeleteButton";
 import CardList from "./CardList";
 
-function DeckView() {
+function DeckView({ deck, setCards }) {
   const { deckId } = useParams();
-  return (
+  // console.log(deck.cards);
+  return deck?.cards ? (
     <>
       <div>Breadcrumb goes here</div>
       <h3>{deckId}'s name goes here</h3>
@@ -16,8 +17,10 @@ function DeckView() {
         <DeleteButton objToDelete={{}} objType={"deck"} />
       </div>
       <h2>Cards</h2>
-      <CardList />
+      <CardList cards={deck.cards} setCards={setCards} />
     </>
+  ) : (
+    <h1>Now Loading...</h1>
   );
 }
 

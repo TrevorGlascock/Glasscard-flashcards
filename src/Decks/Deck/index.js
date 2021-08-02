@@ -1,29 +1,55 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
 import DeckView from "./DeckView";
 import StudyDeck from "./StudyDeck";
 import EditDeck from "./EditDeck";
 import Cards from "./Cards";
+import { readDeck } from "../../utils/api";
 
 function Deck() {
-  const { path } = useRouteMatch();
+  const {
+    path, //Current URL Path
+    params: { deckId }, //deckId taken from the path
+  } = useRouteMatch();
+  //State variable for the current deck
+  const [deck, setDeck] = useState({});
+
+  //Loads the current deck from the API each time deckId changes
+  useEffect(() => {
+    const controller = new AbortController();
+
+    //API call to {API_BASE_URL}/decks/{deckId}?_embed=cards
+    readDeck(deckId, controller.signal)
+      .then(setDeck)
+      .catch((error) => {
+        if (error.name !== "AbortError") throw error;
+      });
+  }, [deckId]);
+
+  function setCards(setterFunction) {
+    setDeck((currentDeck) => ({
+      ...currentDeck,
+      cards: setterFunction(currentDeck.cards),
+    }));
+  }
+
   return (
     <>
       <Switch>
         <Route path={`${path}/study`}>
-          <StudyDeck />
+          <StudyDeck deck={deck} />
         </Route>
 
         <Route path={`${path}/edit`}>
-          <EditDeck />
+          <EditDeck deck={deck} />
         </Route>
 
         <Route path={`${path}/cards`}>
-          <Cards />
+          <Cards deck={deck} />
         </Route>
 
         <Route exact path={path}>
-          <DeckView />
+          <DeckView deck={deck} setCards={setCards} />
         </Route>
 
         <Route>
