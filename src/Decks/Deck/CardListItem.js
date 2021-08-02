@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useRouteMatch } from "react-router-dom";
 import DeleteButton from "../../CommonComponents/DeleteButton";
+import EditButton from "../../CommonComponents/EditButton";
 
 function CardListItem({ card }) {
   const { url } = useRouteMatch();
@@ -9,9 +10,7 @@ function CardListItem({ card }) {
       <div className="card-body">
         <p className="card-text">{card.front}</p>
         <p className="card-text">{card.back}</p>
-        <Link to={`${url}/edit`}>
-          <button className="btn btn-secondary">Edit</button>
-        </Link>
+        <EditButton path={`${url}/cards/${card.id}`} />
         <DeleteButton objToDelete={card} objType={"card"} />
       </div>
     </div>

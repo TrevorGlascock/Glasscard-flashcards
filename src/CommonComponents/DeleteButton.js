@@ -5,13 +5,14 @@ function DeleteButton({ objToDelete, objType }) {
   function handleDelete() {
     if (
       window.confirm(
-        `Are you sure you want to delete the "${objToDelete.name}" ${objType}?`
+        `Delete this ${objType}?\n\nYou will not be able to recover it.`
       )
     )
-      console.log(`Deleting this ${objType}!`);
+      console.log(`Attempting to delete: `, objToDelete);
   }
   return (
-    <button className="btn btn-danger" onClick={() => handleDelete()}>
+    <button className="btn btn-danger " onClick={() => handleDelete()}>
+      <span class="oi oi-trash pr-2" title="trash" aria-hidden="true"></span>
       Delete
     </button>
   );

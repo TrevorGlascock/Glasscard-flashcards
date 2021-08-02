@@ -1,20 +1,26 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { Link, useRouteMatch } from "react-router-dom";
+import AddCardButton from "../../CommonComponents/AddCardButton";
 import DeleteButton from "../../CommonComponents/DeleteButton";
+import EditButton from "../../CommonComponents/EditButton";
+import StudyButton from "../../CommonComponents/StudyButton";
 import CardList from "./CardList";
 
 function DeckView({ deck, setCards }) {
-  const { deckId } = useParams();
+  const {
+    url,
+    params: { deckId },
+  } = useRouteMatch();
   // console.log(deck.cards);
   return deck?.cards ? (
     <>
       <div>Breadcrumb goes here</div>
       <h3>{deckId}'s name goes here</h3>
       <div>
-        <button>Edit</button>
-        <button>Study</button>
-        <button>Add Cards</button>
-        <DeleteButton objToDelete={{}} objType={"deck"} />
+        <EditButton path={url} />
+        <StudyButton path={url} />
+        <AddCardButton path={url} />
+        <DeleteButton objToDelete={deck} objType={"deck"} />
       </div>
       <h2>Cards</h2>
       <CardList cards={deck.cards} setCards={setCards} />

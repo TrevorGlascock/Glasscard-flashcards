@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import DeleteButton from "../CommonComponents/DeleteButton";
+import StudyButton from "../CommonComponents/StudyButton";
 
 function DeckListItem({ deck }) {
   return (
@@ -9,11 +10,12 @@ function DeckListItem({ deck }) {
         <h2 className="card-title">{deck.name}</h2>
         <p className="card-text">{deck.description}</p>
         <Link to={`/decks/${deck.id}`}>
-          <button className="btn btn-secondary">View</button>
+          <button className="btn btn-secondary">
+            <span class="oi oi-eye pr-2" title="eye" aria-hidden="true"></span>
+            View
+          </button>
         </Link>
-        <Link to={`/decks/${deck.id}/study`}>
-          <button className="btn btn-primary">Study</button>
-        </Link>
+        <StudyButton path={`/decks/${deck.id}`} />
         <DeleteButton objToDelete={deck} objType={"deck"} />
       </div>
     </div>
