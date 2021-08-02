@@ -8,14 +8,11 @@ import StudyButton from "../../CommonComponents/StudyButton";
 import CardList from "./CardList";
 
 function DeckView({ deck, setCards }) {
-  const {
-    url,
-    params: { deckId },
-  } = useRouteMatch();
+  const { url } = useRouteMatch();
   return deck?.cards ? (
     <>
-      <Breadcrumb navPath={[deck.name]} />
-      <h3>{deckId}'s name goes here</h3>
+      <Breadcrumb navTitles={[deck.name]} />
+      <h2>{deck.name}</h2>
       <div>
         <EditButton path={url} />
         <StudyButton path={url} />

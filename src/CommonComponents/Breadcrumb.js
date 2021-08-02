@@ -1,17 +1,17 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useRouteMatch } from "react-router-dom";
 
-//TODO add aria-current attribute to the breadcrumb items
 
-function Breadcrumb({ navPath }) {
-  const navItems = navPath
-    ? navPath.map((item, index) => {
-        let { title, destination } = item;
-        //The last item may just be a string of the title instead of an object
-        if (typeof item === "string") title = item;
+function Breadcrumb({ navTitles }) {
+  const { url } = useRouteMatch();
 
-        //The last item in the navPath is rendered differently
-        if (index === navPath.length - 1)
+  //Crumbs is an array of the url elements seperated by the slash
+  const crumbs = url ? url.split("/") : [];
+
+  const navItems = navTitles
+    ? navTitles.map((title, index) => {
+        //The last item in the navTitles is rendered differently
+        if (index === navTitles.length - 1)
           return (
             <li
               key={index}
@@ -21,14 +21,15 @@ function Breadcrumb({ navPath }) {
               {title}
             </li>
           );
-        //All other items will be links to their respective pages
+        //The second navLink will always return to the deck view
+        const crumb = crumbs.slice(0, 3).join("/");
         return (
           <li key={index} className="breadcrumb-item">
-            <Link to={destination}>{title}</Link>
+            <Link to={crumb}>{title}</Link>
           </li>
         );
       })
-    : navPath;
+    : navTitles;
   return (
     <nav aria-label="breadcrumb">
       <ol className="breadcrumb">

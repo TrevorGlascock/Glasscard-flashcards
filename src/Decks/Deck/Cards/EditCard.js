@@ -1,15 +1,13 @@
 import React from "react";
-import { useParams, useRouteMatch } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Breadcrumb from "../../../CommonComponents/Breadcrumb";
-function EditCard() {
-  const { deckId, cardId } = useParams();
-  const { path } = useRouteMatch();
-  console.log(path);
+function EditCard({ deck }) {
+  const { cardId } = useParams();
   return (
     <>
-      <Breadcrumb />
+      <Breadcrumb navTitles={[deck.name, `Edit Card ${cardId}`]} />
       <h1>
-        Edit card {cardId} from deck {deckId}
+        Editing card {cardId} from {deck.name}
       </h1>
     </>
   );

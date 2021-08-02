@@ -4,8 +4,8 @@ import Breadcrumb from "../../CommonComponents/Breadcrumb";
 function NewCard({ deck }) {
   return (
     <>
-      <Breadcrumb />
-      <h1>Creating a new card inside deck {deck.id}</h1>
+      <Breadcrumb navTitles={[deck.name, "Add Card"]} />
+      <h1>Creating a new card inside deck {deck.name}</h1>
     </>
   );
 }
