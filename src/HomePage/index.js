@@ -1,9 +1,10 @@
 import React from "react";
-import LoadingMessage from "../CommonComponents/LoadingMessage";
+import { useRouteMatch } from "react-router-dom";
 import CreateDeckBtn from "./CreateDeckBtn";
 import DeckList from "./DeckList";
 
 function HomePage() {
+  const { url } = useRouteMatch();
   return (
     <>
       <CreateDeckBtn />
