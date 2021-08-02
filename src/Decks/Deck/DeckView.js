@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useRouteMatch } from "react-router-dom";
 import AddCardButton from "../../CommonComponents/AddCardButton";
+import Breadcrumb from "../../CommonComponents/Breadcrumb";
 import DeleteButton from "../../CommonComponents/DeleteButton";
 import EditButton from "../../CommonComponents/EditButton";
 import StudyButton from "../../CommonComponents/StudyButton";
@@ -14,7 +15,7 @@ function DeckView({ deck, setCards }) {
   // console.log(deck.cards);
   return deck?.cards ? (
     <>
-      <div>Breadcrumb goes here</div>
+      <Breadcrumb />
       <h3>{deckId}'s name goes here</h3>
       <div>
         <EditButton path={url} />
