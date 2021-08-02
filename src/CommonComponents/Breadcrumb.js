@@ -6,9 +6,27 @@ import { Link } from "react-router-dom";
 function Breadcrumb({ navPath }) {
   const navItems = navPath
     ? navPath.map((item, index) => {
-        //If it's the last item in the navPath, it needs to be set to active
-        const active = index === navPath.length - 1 ? `active` : null;
-        return <li className={`breadcrumb-item ${active}`}>{item}</li>;
+        let { title, destination } = item;
+        //The last item may just be a string of the title instead of an object
+        if (typeof item === "string") title = item;
+
+        //The last item in the navPath is rendered differently
+        if (index === navPath.length - 1)
+          return (
+            <li
+              key={index}
+              className="breadcrumb-item active"
+              aria-current="page"
+            >
+              {title}
+            </li>
+          );
+        //All other items will be links to their respective pages
+        return (
+          <li key={index} className="breadcrumb-item">
+            <Link to={destination}>{title}</Link>
+          </li>
+        );
       })
     : navPath;
   return (

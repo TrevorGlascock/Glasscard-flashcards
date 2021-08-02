@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useRouteMatch } from "react-router-dom";
+import { useRouteMatch } from "react-router-dom";
 import AddCardButton from "../../CommonComponents/AddCardButton";
 import Breadcrumb from "../../CommonComponents/Breadcrumb";
 import DeleteButton from "../../CommonComponents/DeleteButton";
@@ -12,7 +12,6 @@ function DeckView({ deck, setCards }) {
     url,
     params: { deckId },
   } = useRouteMatch();
-  // console.log(deck.cards);
   return deck?.cards ? (
     <>
       <Breadcrumb navPath={[deck.name]} />

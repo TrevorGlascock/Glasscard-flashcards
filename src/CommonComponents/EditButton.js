@@ -7,7 +7,7 @@ function EditButton({ path }) {
       <Link className="mx-1" to={`${path}/edit`}>
         <button className="btn btn-secondary">
           <span
-            class="oi oi-pencil pr-2"
+            className="oi oi-pencil pr-2"
             title="pencil"
             aria-hidden="true"
           ></span>

@@ -11,7 +11,11 @@ function DeckListItem({ deck }) {
         <p className="card-text">{deck.description}</p>
         <Link className="mx-1" to={`/decks/${deck.id}`}>
           <button className="btn btn-secondary">
-            <span class="oi oi-eye pr-2" title="eye" aria-hidden="true"></span>
+            <span
+              className="oi oi-eye pr-2"
+              title="eye"
+              aria-hidden="true"
+            ></span>
             View
           </button>
         </Link>

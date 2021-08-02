@@ -12,7 +12,7 @@ function DeleteButton({ objToDelete, objType }) {
   }
   return (
     <button className="btn btn-danger mx-1" onClick={() => handleDelete()}>
-      <span class="oi oi-trash pr-2" title="trash" aria-hidden="true"></span>
+      <span className="oi oi-trash pr-2" title="trash" aria-hidden="true"></span>
       Delete
     </button>
   );
