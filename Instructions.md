@@ -310,7 +310,7 @@ The Study screen has the following features:
 
 The next button appears after the card is flipped.
 
-![Study after first card is flipped](https://res.cloudinary.com/strive/image/upload/w_1000,h_1000,c_limit/5a7d4b1050a592638fc1cf0df3f10cd0-rst-card-flipped.png)</div>
+![Study after first card is flipped](https://res.cloudinary.com/strive/image/upload/w_1000,h_1000,c_limit/5a7d4b1050a592638fc1cf0df3f10cd0-rst-card-flipped.png)
 
 #### Restart prompt
 
