@@ -11,7 +11,7 @@ function DeleteButton({ objToDelete, objType }) {
       console.log(`Attempting to delete: `, objToDelete);
   }
   return (
-    <button className="btn btn-danger " onClick={() => handleDelete()}>
+    <button className="btn btn-danger mx-1" onClick={() => handleDelete()}>
       <span class="oi oi-trash pr-2" title="trash" aria-hidden="true"></span>
       Delete
     </button>
