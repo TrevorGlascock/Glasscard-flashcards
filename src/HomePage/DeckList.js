@@ -16,7 +16,7 @@ function DeckList() {
   useEffect(() => {
     const controller = new AbortController(); //to abort old requests
 
-    //API call to {API_BASE_URL}/decks?_embed=cards
+    //API call to {API_BASE_URL}/decks?_embed=cards (All cards embedded in the deck)
     listDecks(controller.signal)
       .then(setDecks)
       .catch((error) => {
