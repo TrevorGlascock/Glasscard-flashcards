@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 function StudyCard({ cards }) {
+  const history = useHistory();
   const defaultStudyState = { index: 0, flipped: false };
   const [studyState, setStudyState] = useState(defaultStudyState);
 
@@ -14,7 +16,13 @@ function StudyCard({ cards }) {
   }
 
   function restartCards() {
-    setStudyState(defaultStudyState);
+    if (
+      window.confirm(
+        `Restart cards?\n\n Click "cancel" to return to the home page`
+      )
+    )
+      setStudyState(defaultStudyState);
+    else history.push("");
   }
 
   return (
