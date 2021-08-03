@@ -43,7 +43,7 @@ function FormTemplate({ objToModify, objType, modifyType, deckName }) {
       <form onSubmit={submitHandler}>
         <div className="form-group">
           <label htmlFor="front">Front</label>
-          <input
+          <textarea
             className="form-control"
             id="front"
             name="front"
