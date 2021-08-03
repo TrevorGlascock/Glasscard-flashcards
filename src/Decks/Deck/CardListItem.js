@@ -1,7 +1,7 @@
 import React from "react";
 import { useRouteMatch } from "react-router-dom";
-import DeleteButton from "../../CommonComponents/DeleteButton";
-import EditButton from "../../CommonComponents/EditButton";
+import DeleteButton from "../../CommonComponents/Buttons/DeleteButton";
+import EditButton from "../../CommonComponents/Buttons/EditButton";
 
 function CardListItem({ card }) {
   const { url } = useRouteMatch();

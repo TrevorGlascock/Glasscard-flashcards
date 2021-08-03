@@ -1,8 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import DeleteButton from "../CommonComponents/DeleteButton";
-import StudyButton from "../CommonComponents/StudyButton";
-import ViewDeckBtn from "./ViewDeckBtn";
+import DeleteButton from "../CommonComponents/Buttons/DeleteButton";
+import StudyButton from "../CommonComponents/Buttons/StudyButton";
+import ViewDeckBtn from "../CommonComponents/Buttons/ViewDeckBtn";
 
 function DeckListItem({ deck }) {
   return (

@@ -1,6 +1,6 @@
 import React from "react";
 import { useRouteMatch } from "react-router-dom";
-import CreateDeckBtn from "./CreateDeckBtn";
+import CreateDeckBtn from "../CommonComponents/Buttons/CreateDeckBtn";
 import DeckList from "./DeckList";
 
 function HomePage() {

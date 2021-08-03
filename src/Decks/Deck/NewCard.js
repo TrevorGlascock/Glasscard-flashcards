@@ -1,6 +1,6 @@
 import React from "react";
 import Breadcrumb from "../../CommonComponents/Breadcrumb";
-import FormTemplate from "../../CommonComponents/FormTemplate";
+import FormTemplate from "../../CommonComponents/Forms/FormTemplate";
 import LoadingMessage from "../../CommonComponents/LoadingMessage";
 
 function NewCard({ deck }) {
