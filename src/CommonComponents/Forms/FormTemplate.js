@@ -2,13 +2,24 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import FormField from "./FormField";
 
-function FormTemplate({ objToModify, objType, modifyType, deckName }) {
-  const submitType = modifyType === "Add" ? "Save" : "Submit";
+function FormTemplate({ objToModify, objType, modifyType }) {
+  //Only add the Deck Name to the heading if we are adding a card
+  const deckHeading =
+    objType === "Card" && modifyType === "Add" ? `${objToModify.name}: ` : null;
+
+  //"Done" when adding, but "Cancel" when editing
   const cancelType = modifyType === "Add" ? "Done" : "Cancel";
-  const deckHeading = deckName ? `${deckName}: ` : null;
+  //"Save" when adding, but "Submit" when editing
+  const submitType = modifyType === "Add" ? "Save" : "Submit";
+
+  //Deck and Card have unique placeholders for each form
+  const firstPlaceholder =
+    objType === "Deck" ? "Deck Name" : "Front side of card";
+  const secondPlaceholder =
+    objType === "Deck" ? "Brief description of the deck" : "Back side of card";
 
   const history = useHistory();
-  const defaultFormState = { front: "", back: "" };
+  const defaultFormState = { firstField: "", secondField: "" };
   const [formData, setFormData] = useState(defaultFormState);
 
   const formChangeHandler = ({ target: { name, value } }) => {
@@ -22,8 +33,8 @@ function FormTemplate({ objToModify, objType, modifyType, deckName }) {
     event.preventDefault();
     console.log(
       "API Call goes here!\nfor now here's the data:\n",
-      `Front: ${formData.front}\n`,
-      `Back: ${formData.back}`
+      `Front: ${formData.firstField}\n`,
+      `Back: ${formData.secondField}`
     );
     setFormData(defaultFormState);
     history.push(""); //This needs to change to deckView
@@ -45,15 +56,15 @@ function FormTemplate({ objToModify, objType, modifyType, deckName }) {
         <FormField
           inputType={objType === "Deck" ? "text" : "textarea"}
           name="front"
-          placeholder="What question will be asked?"
-          value={formData.front}
+          placeholder={firstPlaceholder}
+          value={formData.firstField}
           formChangeHandler={formChangeHandler}
         />
         <FormField
           inputType="textarea"
           name="back"
-          placeholder="What is the answer to that question?"
-          value={formData.back}
+          placeholder={secondPlaceholder}
+          value={formData.secondField}
           formChangeHandler={formChangeHandler}
         />
         <div>
