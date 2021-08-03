@@ -43,12 +43,14 @@ function FormTemplate({ objToModify, objType, modifyType, deckName }) {
       </h1>
       <form onSubmit={submitHandler}>
         <FormField
+          inputType={objType === "Deck" ? "text" : "textarea"}
           name="front"
           placeholder="What question will be asked?"
           value={formData.front}
           formChangeHandler={formChangeHandler}
         />
         <FormField
+          inputType="textarea"
           name="back"
           placeholder="What is the answer to that question?"
           value={formData.back}
