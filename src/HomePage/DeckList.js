@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import CreateDeckBtn from "../CommonComponents/Buttons/CreateDeckBtn";
 import LoadingMessage from "../CommonComponents/LoadingMessage";
 import DeckListItem from "./DeckListItem";
