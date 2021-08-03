@@ -3,15 +3,23 @@ import { useHistory } from "react-router-dom";
 
 function StudyCard({ cards }) {
   const history = useHistory();
-  const defaultStudyState = { index: 0, flipped: false };
+  const defaultStudyState = { index: 0, flipped: false, freshView: true };
   const [studyState, setStudyState] = useState(defaultStudyState);
 
   function flipHandler() {
-    setStudyState({ ...studyState, flipped: !studyState.flipped });
+    setStudyState({
+      ...studyState,
+      flipped: !studyState.flipped,
+      freshView: false,
+    });
   }
   function nextHandler() {
     if (studyState.index < cards.length - 1)
-      setStudyState({ ...studyState, index: studyState.index + 1 });
+      setStudyState({
+        index: studyState.index + 1,
+        flipped: false,
+        freshView: true,
+      });
     else restartCards();
   }
 
@@ -39,9 +47,11 @@ function StudyCard({ cards }) {
         <button className="btn btn-secondary mr-2" onClick={flipHandler}>
           Flip
         </button>
-        <button className="btn btn-primary mr-2" onClick={nextHandler}>
-          Next
-        </button>
+        {studyState.freshView ? null : (
+          <button className="btn btn-primary mr-2" onClick={nextHandler}>
+            Next
+          </button>
+        )}
       </div>
     </div>
   );
