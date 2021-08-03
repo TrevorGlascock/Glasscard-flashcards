@@ -1,10 +1,10 @@
 import React from "react";
 import { useRouteMatch } from "react-router-dom";
-import AddCardButton from "../../CommonComponents/AddCardButton";
+import AddCardButton from "../../CommonComponents/Buttons/AddCardButton";
+import DeleteButton from "../../CommonComponents/Buttons/DeleteButton";
+import EditButton from "../../CommonComponents/Buttons/EditButton";
+import StudyButton from "../../CommonComponents/Buttons/StudyButton";
 import Breadcrumb from "../../CommonComponents/Breadcrumb";
-import DeleteButton from "../../CommonComponents/DeleteButton";
-import EditButton from "../../CommonComponents/EditButton";
-import StudyButton from "../../CommonComponents/StudyButton";
 import LoadingMessage from "../../CommonComponents/LoadingMessage";
 import CardList from "./CardList";
 
