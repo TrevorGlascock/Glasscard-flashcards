@@ -1,15 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
 import Breadcrumb from "../../../CommonComponents/Breadcrumb";
 import FormTemplate from "../../../CommonComponents/Forms/FormTemplate";
 import LoadingMessage from "../../../CommonComponents/LoadingMessage";
-function EditCard({ deck, cards }) {
+function EditCard({ deck }) {
   const { cardId } = useParams();
-  const card = deck?.cards?.[cardId];
+  const card = deck?.cards?.find((card) => card.id === Number(cardId));
 
-  return deck?.id && cardId && cards ? (
+  //TODO make api call to get the card from the database instead of using a passed down card
+  return card ? (
     <>
-      <Breadcrumb navTitles={[deck.name, `Edit Card ${cardId}`]} />
+      <Breadcrumb navTitles={[deck.name, `Edit Card ${card.id}`]} />
       <FormTemplate objToModify={card} objType="Card" modifyType="Edit" />
     </>
   ) : (

@@ -8,7 +8,7 @@ function NewCard({ deck }) {
     <>
       <Breadcrumb navTitles={[deck.name, "Add Card"]} />
       <FormTemplate
-        objToModify={deck}
+        objToModify={{}}
         objType="Card"
         modifyType="Add"
         deckName={deck.name}

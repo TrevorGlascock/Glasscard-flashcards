@@ -7,11 +7,8 @@ function Cards({ deck }) {
   return (
     <>
       <Switch>
-        <Route path={`${path}/new`}>
-          <h1>Add Card to Deck {deck.id}</h1>
-        </Route>
         <Route path={`${path}/:cardId/edit`}>
-          <EditCard deck={deck} cards={deck.cards} />
+          <EditCard deck={deck} />
         </Route>
         <Route>
           <h1>Not a valid URL!</h1>

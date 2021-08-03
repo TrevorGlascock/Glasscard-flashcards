@@ -3,6 +3,9 @@ import { useHistory } from "react-router-dom";
 import FormField from "./FormField";
 
 function FormTemplate({ objToModify, objType, modifyType }) {
+  //For the event handlers to navigate
+  const history = useHistory();
+
   //Only add the Deck Name to the heading if we are adding a card
   const deckHeading =
     objType === "Card" && modifyType === "Add" ? `${objToModify.name}: ` : null;
@@ -18,8 +21,18 @@ function FormTemplate({ objToModify, objType, modifyType }) {
   const secondPlaceholder =
     objType === "Deck" ? "Brief description of the deck" : "Back side of card";
 
-  const history = useHistory();
-  const defaultFormState = { firstField: "", secondField: "" };
+  //Default state is empty when adding, but is the current data when editing.
+  const defaultFormState =
+    modifyType === "Add"
+      ? //When Adding...
+        objType === "Deck"
+        ? { name: "", description: "" } //Add Empty Deck for Deck
+        : { front: "", back: "" } //Add Empty Card for Card
+      : //When Editing...
+      objType === "Deck"
+      ? { name: objToModify.name, description: objToModify.description } //Deck name & Description for Deck
+      : { front: objToModify.front, back: objToModify.back }; //Card front & back for Card
+
   const [formData, setFormData] = useState(defaultFormState);
 
   const formChangeHandler = ({ target: { name, value } }) => {
@@ -29,12 +42,35 @@ function FormTemplate({ objToModify, objType, modifyType }) {
     });
   };
 
-  const submitHandler = (event) => {
+  const editSubmitHandler = (event) => {
     event.preventDefault();
     console.log(
-      "API Call goes here!\nfor now here's the data:\n",
-      `Front: ${formData.firstField}\n`,
-      `Back: ${formData.secondField}`
+      `Change this ${objType} from\n`,
+      objToModify,
+      `\nto:\n`,
+      objType === "Deck"
+        ? {
+            ...objToModify,
+            name: formData.name,
+            description: formData.description,
+          }
+        : { ...objToModify, front: formData.front, back: formData.back }
+    );
+    setFormData(defaultFormState);
+    history.push(""); //This needs to change to deckView
+  };
+
+  const addSubmitHandler = (event) => {
+    event.preventDefault();
+    console.log(
+      `Add the following new ${objType}:\n`,
+      objType === "Deck"
+        ? {
+            ...objToModify,
+            name: formData.name,
+            description: formData.description,
+          }
+        : { ...objToModify, front: formData.front, back: formData.back }
     );
     setFormData(defaultFormState);
     history.push(""); //This needs to change to deckView
@@ -52,19 +88,21 @@ function FormTemplate({ objToModify, objType, modifyType }) {
         {deckHeading}
         {modifyType} {objType}
       </h1>
-      <form onSubmit={submitHandler}>
+      <form
+        onSubmit={modifyType === "Add" ? addSubmitHandler : editSubmitHandler}
+      >
         <FormField
           inputType={objType === "Deck" ? "text" : "textarea"}
-          name="front"
+          name={objType === "Deck" ? "name" : "front"}
           placeholder={firstPlaceholder}
-          value={formData.firstField}
+          value={objType === "Deck" ? formData.name : formData.front}
           formChangeHandler={formChangeHandler}
         />
         <FormField
           inputType="textarea"
-          name="back"
+          name={objType === "Deck" ? "description" : "back"}
           placeholder={secondPlaceholder}
-          value={formData.secondField}
+          value={objType === "Deck" ? formData.description : formData.back}
           formChangeHandler={formChangeHandler}
         />
         <div>
