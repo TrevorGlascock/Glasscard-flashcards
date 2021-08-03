@@ -2,13 +2,12 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import FormField from "./FormField";
 
-function FormTemplate({ objToModify, objType, modifyType }) {
+function FormTemplate({ objToModify, objType, modifyType, deckName }) {
   //For the event handlers to navigate
   const history = useHistory();
 
-  //Only add the Deck Name to the heading if we are adding a card
-  const deckHeading =
-    objType === "Card" && modifyType === "Add" ? `${objToModify.name}: ` : null;
+  //Only add the Deck Name to the heading if the component is given a deckName prop
+  const deckHeading = deckName ? `${deckName}: ` : null;
 
   //"Done" when adding, but "Cancel" when editing
   const cancelType = modifyType === "Add" ? "Done" : "Cancel";
