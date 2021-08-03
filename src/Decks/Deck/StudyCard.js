@@ -7,7 +7,10 @@ function StudyCard({ cards }) {
   const flipHandler = () => {
     setStudyState({ ...studyState, flipped: !studyState.flipped });
   };
-  const nextHandler = () => {};
+  const nextHandler = () => {
+    if (studyState.index < cards.length - 1)
+      setStudyState({ ...studyState, index: studyState.index + 1 });
+  };
 
   return (
     <div className="card">
