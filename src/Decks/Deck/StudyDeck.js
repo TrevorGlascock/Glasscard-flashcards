@@ -8,7 +8,7 @@ function StudyDeck({ deck }) {
     <>
       <Breadcrumb navTitles={[deck.name, "Study"]} />
       <h1>Study: {deck.name}</h1>
-      <StudyCard />
+      <StudyCard cards={deck.cards} />
     </>
   ) : (
     <LoadingMessage />
