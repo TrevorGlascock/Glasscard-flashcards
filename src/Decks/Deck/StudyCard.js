@@ -4,13 +4,18 @@ function StudyCard({ cards }) {
   const defaultStudyState = { index: 0, flipped: false };
   const [studyState, setStudyState] = useState(defaultStudyState);
 
-  const flipHandler = () => {
+  function flipHandler() {
     setStudyState({ ...studyState, flipped: !studyState.flipped });
-  };
-  const nextHandler = () => {
+  }
+  function nextHandler() {
     if (studyState.index < cards.length - 1)
       setStudyState({ ...studyState, index: studyState.index + 1 });
-  };
+    else restartCards();
+  }
+
+  function restartCards() {
+    setStudyState(defaultStudyState);
+  }
 
   return (
     <div className="card">
