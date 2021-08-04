@@ -9,6 +9,10 @@ function DeleteButton({ objToDelete, objType }) {
       )
     )
       console.log(`Attempting to delete: `, objToDelete);
+      //make the delete request
+      //make a get request
+      //call setDecks passed in as a property setting to the new get call
+      //history.push("")
   }
   return (
     <button className="btn btn-danger mx-1" onClick={() => handleDelete()}>

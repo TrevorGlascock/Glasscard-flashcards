@@ -3,7 +3,7 @@ import { Route, Switch, useRouteMatch } from "react-router-dom";
 import Deck from "./Deck";
 import NewDeck from "./NewDeck";
 
-function Decks() {
+function Decks({ decks, setDecks }) {
   const { url } = useRouteMatch();
   return (
     <>
@@ -12,7 +12,7 @@ function Decks() {
           <NewDeck />
         </Route>
         <Route path={`${url}/:deckId`}>
-          <Deck />
+          <Deck decks={decks} />
         </Route>
         <Route>
           <h1>Not a valid URL!</h1>
