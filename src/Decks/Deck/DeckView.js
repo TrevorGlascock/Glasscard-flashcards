@@ -8,7 +8,7 @@ import Breadcrumb from "../../CommonComponents/Breadcrumb";
 import LoadingMessage from "../../CommonComponents/LoadingMessage";
 import CardList from "./CardList";
 
-function DeckView({ deck, setCards }) {
+function DeckView({ deck }) {
   const { url } = useRouteMatch();
   return deck?.cards ? (
     <>
@@ -21,7 +21,7 @@ function DeckView({ deck, setCards }) {
         <DeleteButton objToDelete={deck} objType={"deck"} />
       </div>
       <h2>Cards</h2>
-      <CardList cards={deck.cards} setCards={setCards} />
+      <CardList cards={deck.cards} />
     </>
   ) : (
     <LoadingMessage />
