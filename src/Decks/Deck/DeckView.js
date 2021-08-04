@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useRouteMatch } from "react-router-dom";
 import AddCardButton from "../../CommonComponents/Buttons/AddCardButton";
 import DeleteButton from "../../CommonComponents/Buttons/DeleteButton";
@@ -8,9 +8,18 @@ import Breadcrumb from "../../CommonComponents/Breadcrumb";
 import LoadingMessage from "../../CommonComponents/LoadingMessage";
 import CardList from "./CardList";
 
-function DeckView({ deck, setCards }) {
-  const { url } = useRouteMatch();
-  return deck?.cards ? (
+function DeckView({ deck, setDeck }) {
+  const { url } = useRouteMatch(); //Grab the url for the for each button's path
+
+  //cards is a state variable array of each card in the current deck
+  const [cards, setCards] = useState([]);
+
+  //Update cards array whenever there is a change to it's parent Component's deck Object
+  useEffect(() => {
+    setCards(deck?.cards);
+  }, [deck]);
+
+  return deck?.name && cards ? (
     <>
       <Breadcrumb navTitles={[deck.name]} />
       <h2>{deck.name}</h2>
@@ -18,10 +27,14 @@ function DeckView({ deck, setCards }) {
         <EditButton path={url} />
         <StudyButton path={url} />
         <AddCardButton path={url} />
-        <DeleteButton objToDelete={deck} objType={"deck"} />
+        <DeleteButton
+          objToDelete={deck}
+          objType={"deck"}
+          setObjState={setDeck}
+        />
       </div>
       <h2>Cards</h2>
-      <CardList cards={deck.cards} setCards={setCards} />
+      <CardList cards={cards} setCards={setCards} />
     </>
   ) : (
     <LoadingMessage />

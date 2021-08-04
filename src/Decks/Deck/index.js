@@ -5,34 +5,20 @@ import StudyDeck from "./StudyDeck";
 import EditDeck from "./EditDeck";
 import NewCard from "./NewCard";
 import Cards from "./Cards";
-import { readDeck } from "../../utils/api";
 
-function Deck() {
+function Deck({ decks }) {
   const {
     path, //Current URL Path
     params: { deckId }, //deckId taken from the path
   } = useRouteMatch();
-  //State variable for the current deck
+
+  //deck is a state variable that stores the current deck Object
   const [deck, setDeck] = useState({});
 
-  //Loads the current deck from the API each time deckId changes
+  //Update deck whenever there is a change to the deckId in the url, or to the parent component's decks array
   useEffect(() => {
-    const controller = new AbortController();
-
-    //API call to {API_BASE_URL}/decks/{deckId}?_embed=cards
-    readDeck(deckId, controller.signal)
-      .then(setDeck)
-      .catch((error) => {
-        if (error.name !== "AbortError") throw error;
-      });
-  }, [deckId]);
-
-  function setCards(setterFunction) {
-    setDeck((currentDeck) => ({
-      ...currentDeck,
-      cards: setterFunction(currentDeck.cards),
-    }));
-  }
+    setDeck(decks?.find((deck) => deck.id === Number(deckId))); //defines the current deck object based on the deckId param in the url
+  }, [deckId, decks]);
 
   return (
     <>
@@ -54,7 +40,7 @@ function Deck() {
         </Route>
 
         <Route exact path={path}>
-          <DeckView deck={deck} setCards={setCards} />
+          <DeckView deck={deck} setDeck={setDeck} />
         </Route>
 
         <Route>

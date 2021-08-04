@@ -1,18 +1,54 @@
 import React from "react";
+import { useHistory, useParams } from "react-router-dom";
+import { deleteCard, deleteDeck, listCards, listDecks } from "../../utils/api";
 
-function DeleteButton({ objToDelete, objType }) {
+function DeleteButton({ objToDelete, objType, setObjState }) {
+  const history = useHistory();
+  const { deckId } = useParams();
   //Event Handler to Delete specefied object
   function handleDelete() {
     if (
       window.confirm(
         `Delete this ${objType}?\n\nYou will not be able to recover it.`
       )
-    )
-      console.log(`Attempting to delete: `, objToDelete);
+    ) {
+      const controller = new AbortController(); //to abort old requests
+      //Distinguish the type of delete
+      objType === "deck"
+        ? deleteDeck(objToDelete.id) //deleteDeck if it's a Deck
+            .then(() => updateDecks(controller))
+            .then(() => history.push(""))
+        : deleteCard(objToDelete.id) //deleteCard if it's a Card
+            .then(() => updateCards(controller));
+      //.then(() => history.push(""));
+    }
+    //if we cancel, then go home without deleting
+    else history.push("");
   }
+
+  function updateDecks({ signal }) {
+    listDecks(signal)
+      .then(setObjState)
+      .catch((error) => {
+        if (error.name !== "AbortError") throw error;
+      });
+  }
+
+  function updateCards({ signal }) {
+    listCards(deckId, signal)
+      .then(setObjState)
+      .catch((error) => {
+        if (error.name !== "AbortError") throw error;
+      });
+  }
+
   return (
     <button className="btn btn-danger mx-1" onClick={() => handleDelete()}>
-      <span className="oi oi-trash pr-2" title="trash" aria-hidden="true"></span>
+      <span
+        className="oi oi-trash pr-2"
+        title="trash"
+        aria-hidden="true"
+      ></span>
       Delete
     </button>
   );
