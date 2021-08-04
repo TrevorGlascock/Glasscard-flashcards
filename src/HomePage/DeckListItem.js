@@ -3,7 +3,7 @@ import DeleteButton from "../CommonComponents/Buttons/DeleteButton";
 import StudyButton from "../CommonComponents/Buttons/StudyButton";
 import ViewDeckBtn from "../CommonComponents/Buttons/ViewDeckBtn";
 
-function DeckListItem({ deck }) {
+function DeckListItem({ deck, setDecks }) {
   return (
     <div className="card">
       <div className="card-body">
@@ -11,10 +11,10 @@ function DeckListItem({ deck }) {
         <p className="card-text">{deck.description}</p>
         <ViewDeckBtn path={`/decks/${deck.id}`} />
         <StudyButton path={`/decks/${deck.id}`} />
-        <DeleteButton objToDelete={deck} objType={"deck"} />
+        <DeleteButton objToDelete={deck} objType={"deck"} setDecks={setDecks} />
       </div>
     </div>
   );
 }
 
-export default DeckListItem;
+export default DeckListItem;         
