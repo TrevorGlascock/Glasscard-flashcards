@@ -1,9 +1,10 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
-import { deleteCard, deleteDeck, listDecks } from "../../utils/api";
+import { useHistory, useParams } from "react-router-dom";
+import { deleteCard, deleteDeck, listCards, listDecks } from "../../utils/api";
 
-function DeleteButton({ objToDelete, objType, setDecks }) {
+function DeleteButton({ objToDelete, objType, setObjState }) {
   const history = useHistory();
+  const { deckId } = useParams();
   //Event Handler to Delete specefied object
   function handleDelete() {
     if (
@@ -11,23 +12,34 @@ function DeleteButton({ objToDelete, objType, setDecks }) {
         `Delete this ${objType}?\n\nYou will not be able to recover it.`
       )
     ) {
+      const controller = new AbortController(); //to abort old requests
       //Distinguish the type of delete
       objType === "deck"
-        ? deleteDeck(objToDelete.id).then(updateDecks) //deleteDeck if it's a Deck
-        : deleteCard(objToDelete.id).then(updateDecks); //deleteCard if it's a Card
+        ? deleteDeck(objToDelete.id) //deleteDeck if it's a Deck
+            .then(() => updateDecks(controller))
+            .then(() => history.push(""))
+        : deleteCard(objToDelete.id) //deleteCard if it's a Card
+            .then(() => updateCards(controller));
+      //.then(() => history.push(""));
     }
     //if we cancel, then go home without deleting
     else history.push("");
   }
 
-  function updateDecks() {
-    const controller = new AbortController(); //to abort old requests
-    listDecks(controller.signal)
-      .then(setDecks)
+  function updateDecks({ signal }) {
+    listDecks(signal)
+      .then(setObjState)
       .catch((error) => {
         if (error.name !== "AbortError") throw error;
       });
-    // .then(() => history.push(""));
+  }
+
+  function updateCards({ signal }) {
+    listCards(deckId, signal)
+      .then(setObjState)
+      .catch((error) => {
+        if (error.name !== "AbortError") throw error;
+      });
   }
 
   return (

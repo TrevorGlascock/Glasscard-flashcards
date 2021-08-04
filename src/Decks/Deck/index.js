@@ -13,34 +13,18 @@ function Deck({ decks }) {
   } = useRouteMatch();
 
   //State variable for the current deck
-  const [deck, setDeck] = useState(
-    decks?.find((deck) => deck.id === Number(deckId))
-  );
-
-  //TODO fix the infinite loading bug when user's refresh
+  const [deck, setDeck] = useState({});
 
   useEffect(() => {
     setDeck(decks?.find((deck) => deck.id === Number(deckId)));
   }, [deckId, deck, decks]);
 
-  // //Loads the current deck from the API each time deckId changes
-  // useEffect(() => {
-  //   const controller = new AbortController();
-
-  //   //API call to {API_BASE_URL}/decks/{deckId}?_embed=cards
-  //   readDeck(deckId, controller.signal)
-  //     .then(setDeck)
-  //     .catch((error) => {
-  //       if (error.name !== "AbortError") throw error;
-  //     });
-  // }, [deckId]);
-
-  // function setCards(setterFunction) {
-  //   setDeck((currentDeck) => ({
-  //     ...currentDeck,
-  //     cards: setterFunction(currentDeck.cards),
-  //   }));
-  // }
+  function setCards(setterFunction) {
+    // setDeck((currentDeck) => ({
+    //   ...currentDeck,
+    //   cards: setterFunction(currentDeck.cards),
+    // }));
+  }
 
   return (
     <>
@@ -62,7 +46,7 @@ function Deck({ decks }) {
         </Route>
 
         <Route exact path={path}>
-          <DeckView deck={deck} />
+          <DeckView deck={deck} setDeck={setDeck} setCards={setCards} />
         </Route>
 
         <Route>

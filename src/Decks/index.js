@@ -12,7 +12,7 @@ function Decks({ decks, setDecks }) {
           <NewDeck />
         </Route>
         <Route path={`${url}/:deckId`}>
-          <Deck decks={decks} />
+          <Deck decks={decks} setDecks={setDecks} />
         </Route>
         <Route>
           <h1>Not a valid URL!</h1>
