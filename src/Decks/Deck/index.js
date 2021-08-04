@@ -12,19 +12,13 @@ function Deck({ decks }) {
     params: { deckId }, //deckId taken from the path
   } = useRouteMatch();
 
-  //State variable for the current deck
+  //deck is a state variable that stores the current deck Object
   const [deck, setDeck] = useState({});
 
+  //Update deck whenever there is a change to the deckId in the url, or to the parent component's decks array
   useEffect(() => {
-    setDeck(decks?.find((deck) => deck.id === Number(deckId)));
-  }, [deckId, deck, decks]);
-
-  function setCards(setterFunction) {
-    // setDeck((currentDeck) => ({
-    //   ...currentDeck,
-    //   cards: setterFunction(currentDeck.cards),
-    // }));
-  }
+    setDeck(decks?.find((deck) => deck.id === Number(deckId))); //defines the current deck object based on the deckId param in the url
+  }, [deckId, decks]);
 
   return (
     <>
@@ -46,7 +40,7 @@ function Deck({ decks }) {
         </Route>
 
         <Route exact path={path}>
-          <DeckView deck={deck} setDeck={setDeck} setCards={setCards} />
+          <DeckView deck={deck} setDeck={setDeck} />
         </Route>
 
         <Route>

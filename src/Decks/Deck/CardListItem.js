@@ -3,8 +3,9 @@ import { useRouteMatch } from "react-router-dom";
 import DeleteButton from "../../CommonComponents/Buttons/DeleteButton";
 import EditButton from "../../CommonComponents/Buttons/EditButton";
 
+//CardListItem is a template that makes an HTML Card with the correct data to be be displayed
 function CardListItem({ card, setCards }) {
-  const { url } = useRouteMatch();
+  const { url } = useRouteMatch(); //Grab the url for the EditButton's path
   return (
     <div className="card">
       <div className="card-body">

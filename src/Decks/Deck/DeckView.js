@@ -9,8 +9,12 @@ import LoadingMessage from "../../CommonComponents/LoadingMessage";
 import CardList from "./CardList";
 
 function DeckView({ deck, setDeck }) {
-  const { url } = useRouteMatch();
+  const { url } = useRouteMatch(); //Grab the url for the for each button's path
+
+  //cards is a state variable array of each card in the current deck
   const [cards, setCards] = useState([]);
+
+  //Update cards array whenever there is a change to it's parent Component's deck Object
   useEffect(() => {
     setCards(deck?.cards);
   }, [deck]);
