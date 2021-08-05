@@ -15,11 +15,16 @@ function Layout() {
     const controller = new AbortController(); //to abort old requests
 
     //API call to {API_BASE_URL}/decks?_embed=cards (All cards embedded in the deck)
-    listDecks(controller.signal)
-      .then(setDecks)
-      .catch((error) => {
-        if (error.name !== "AbortError") throw error;
-      });
+    async function loadDecks() {
+      listDecks(controller.signal)
+        .then(setDecks)
+        .catch((error) => {
+          if (error.name !== "AbortError") throw error;
+        });
+    }
+
+    loadDecks();
+    return () => controller.abort(); //cleanup
   }, []);
 
   return (
