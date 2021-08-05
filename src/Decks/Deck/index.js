@@ -3,7 +3,6 @@ import { Route, Switch, useRouteMatch } from "react-router-dom";
 import DeckView from "./DeckView";
 import StudyDeck from "./StudyDeck";
 import EditDeck from "./EditDeck";
-import NewCard from "./Cards/NewCard";
 import Cards from "./Cards";
 import { readDeck } from "../../utils/api";
 
@@ -21,7 +20,7 @@ function Deck({ decks, setDecks }) {
     const controller = new AbortController(); //to abort old requests
 
     //API call to {API_BASE_URL}/decks/deckId/?_embed=cards (All cards embedded in the deck)
-    async function loadDecks() {
+    async function loadDeck() {
       readDeck(deckId, controller.signal)
         .then(setDeck)
         .catch((error) => {
@@ -29,9 +28,9 @@ function Deck({ decks, setDecks }) {
         });
     }
 
-    loadDecks();
+    loadDeck();
     return () => controller.abort(); //cleanup
-  }, []);
+  }, [deckId]);
 
   /************************************    A more efficient useEffect that has fewer API calls      *************************************
    * 
