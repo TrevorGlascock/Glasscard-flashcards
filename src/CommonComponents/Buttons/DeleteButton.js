@@ -1,10 +1,9 @@
 import React from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { deleteCard, deleteDeck, listDecks } from "../../utils/api";
 
 function DeleteButton({ objToDelete, objType, setDecks }) {
   const history = useHistory();
-  const { deckId } = useParams();
   //Event Handler to Delete specefied object
   function handleDelete() {
     if (
