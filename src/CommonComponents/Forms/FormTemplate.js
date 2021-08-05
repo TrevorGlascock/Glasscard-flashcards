@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import { useHistory, useRouteMatch } from "react-router-dom";
-import { createCard, createDeck, listDecks, updateDeck } from "../../utils/api";
+import {
+  createCard,
+  createDeck,
+  listDecks,
+  updateCard,
+  updateDeck,
+} from "../../utils/api";
 import FormField from "./FormField";
 
 function FormTemplate({
@@ -67,7 +73,12 @@ function FormTemplate({
     updateDeck(newDeck, signal).then(() => updateDecks(signal));
   }
   function editCard({ signal }) {
-    console.log({ ...objToModify, front: formData.front, back: formData.back });
+    const newCard = {
+      ...objToModify,
+      front: formData.front,
+      back: formData.back,
+    };
+    updateCard(newCard, signal).then(() => updateDecks(signal));
   }
 
   const addSubmitHandler = (event) => {
