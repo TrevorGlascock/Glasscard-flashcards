@@ -8,7 +8,7 @@ import Breadcrumb from "../../CommonComponents/Breadcrumb";
 import LoadingMessage from "../../CommonComponents/LoadingMessage";
 import CardList from "./CardList";
 
-function DeckView({ deck, setDeck }) {
+function DeckView({ deck, setDecks }) {
   const { url } = useRouteMatch(); //Grab the url for the for each button's path
 
   //cards is a state variable array of each card in the current deck
@@ -30,7 +30,7 @@ function DeckView({ deck, setDeck }) {
         <DeleteButton
           objToDelete={deck}
           objType={"deck"}
-          setObjState={setDeck}
+          setObjState={setDecks}
         />
       </div>
       <h2>Cards</h2>

@@ -40,7 +40,7 @@ function Deck({ decks, setDecks }) {
         </Route>
 
         <Route exact path={path}>
-          <DeckView deck={deck} setDeck={setDeck} />
+          <DeckView deck={deck} setDecks={setDecks} />
         </Route>
 
         <Route>
