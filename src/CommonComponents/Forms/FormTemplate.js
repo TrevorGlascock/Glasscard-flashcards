@@ -118,7 +118,7 @@ function FormTemplate({
          * Adding new card goes nowhere
          * Editing new card goes to DeckView
          */
-        if (objType !== "Card" && modifyType !== "Add")
+        if (objType !== "Card" || modifyType !== "Add")
           history.push(deckViewURL);
       });
   }
