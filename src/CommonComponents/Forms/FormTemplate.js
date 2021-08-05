@@ -3,7 +3,7 @@ import { useHistory, useRouteMatch } from "react-router-dom";
 import { createCard, createDeck, listDecks } from "../../utils/api";
 import FormField from "./FormField";
 
-function FormTemplate({ objToModify, objType, modifyType, deckName, setDeck }) {
+function FormTemplate({ objToModify, objType, modifyType, deckName, setDecks }) {
   //For the event handlers to navigate
   const history = useHistory();
   const {
@@ -74,6 +74,7 @@ function FormTemplate({ objToModify, objType, modifyType, deckName, setDeck }) {
     const newDeck = { name: formData.name, description: formData.description };
     createDeck(newDeck, signal).then(() => updateDecks(signal));
   }
+
   function addCard({ signal }) {
     console.log();
     const newCard = {
@@ -85,18 +86,17 @@ function FormTemplate({ objToModify, objType, modifyType, deckName, setDeck }) {
 
   function updateDecks(signal) {
     listDecks(signal)
-      .then(setDeck)
+      .then(setDecks)
       .catch((error) => {
         if (error.name !== "AbortError") throw error;
       })
       .then(() => {
         setFormData(defaultFormState);
-        history.push(""); //make this deckview
+        history.push(""); //this needs to change to deckView
       });
   }
 
   const cancelHandler = () => {
-    console.log(objToModify);
     setFormData(defaultFormState);
     history.push(""); //this needs to change to deckView
   };

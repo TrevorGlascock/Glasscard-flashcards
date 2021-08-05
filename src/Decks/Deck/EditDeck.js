@@ -3,7 +3,7 @@ import Breadcrumb from "../../CommonComponents/Breadcrumb";
 import FormTemplate from "../../CommonComponents/Forms/FormTemplate";
 import LoadingMessage from "../../CommonComponents/LoadingMessage";
 
-function EditDeck({ deck, setDeck }) {
+function EditDeck({ deck, setDecks }) {
   return deck?.id ? (
     <>
       <Breadcrumb navTitles={[deck.name, "Edit Deck"]} />
@@ -11,7 +11,7 @@ function EditDeck({ deck, setDeck }) {
         objToModify={deck}
         objType="Deck"
         modifyType="Edit"
-        setObjState={setDeck}
+        setDecks={setDecks}
       />
     </>
   ) : (

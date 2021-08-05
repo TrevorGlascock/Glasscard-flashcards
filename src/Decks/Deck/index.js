@@ -6,7 +6,7 @@ import EditDeck from "./EditDeck";
 import NewCard from "./NewCard";
 import Cards from "./Cards";
 
-function Deck({ decks }) {
+function Deck({ decks, setDecks }) {
   const {
     path, //Current URL Path
     params: { deckId }, //deckId taken from the path
@@ -28,15 +28,15 @@ function Deck({ decks }) {
         </Route>
 
         <Route path={`${path}/edit`}>
-          <EditDeck deck={deck} setDeck={setDeck} />
+          <EditDeck deck={deck} setDecks={setDecks} />
         </Route>
 
         <Route path={`${path}/new`}>
-          <NewCard deck={deck} setDeck={setDeck} />
+          <NewCard deck={deck} setDecks={setDecks} />
         </Route>
 
         <Route path={`${path}/cards`}>
-          <Cards deck={deck} setDeck={setDeck} />
+          <Cards deck={deck} setDecks={setDecks} />
         </Route>
 
         <Route exact path={path}>

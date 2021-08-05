@@ -9,7 +9,7 @@ function Decks({ decks, setDecks }) {
     <>
       <Switch>
         <Route path={`${url}/new`}>
-          <NewDeck />
+          <NewDeck setDecks={setDecks} />
         </Route>
         <Route path={`${url}/:deckId`}>
           <Deck decks={decks} setDecks={setDecks} />
