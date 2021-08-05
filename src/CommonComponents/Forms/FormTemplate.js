@@ -1,9 +1,16 @@
 import React, { useState } from "react";
 import { useHistory, useRouteMatch } from "react-router-dom";
+import EditCard from "../../Decks/Deck/Cards/EditCard";
 import { createCard, createDeck, listDecks } from "../../utils/api";
 import FormField from "./FormField";
 
-function FormTemplate({ objToModify, objType, modifyType, deckName, setDecks }) {
+function FormTemplate({
+  objToModify,
+  objType,
+  modifyType,
+  deckName,
+  setDecks,
+}) {
   //For the event handlers to navigate
   const history = useHistory();
   const {
@@ -48,21 +55,20 @@ function FormTemplate({ objToModify, objType, modifyType, deckName, setDecks }) 
 
   const editSubmitHandler = (event) => {
     event.preventDefault();
-    console.log(
-      `Change this ${objType} from\n`,
-      objToModify,
-      `\nto:\n`,
-      objType === "Deck"
-        ? {
-            ...objToModify,
-            name: formData.name,
-            description: formData.description,
-          }
-        : { ...objToModify, front: formData.front, back: formData.back }
-    );
-    setFormData(defaultFormState);
-    history.push(""); //This needs to change to deckView
+    const controller = new AbortController();
+    objType === "Deck" ? editDeck(controller) : editCard(controller);
   };
+
+  function editDeck({ signal }) {
+    console.log({
+      ...objToModify,
+      name: formData.name,
+      description: formData.description,
+    });
+  }
+  function editCard({ signal }) {
+    console.log({ ...objToModify, front: formData.front, back: formData.back });
+  }
 
   const addSubmitHandler = (event) => {
     event.preventDefault();
@@ -76,7 +82,6 @@ function FormTemplate({ objToModify, objType, modifyType, deckName, setDecks }) 
   }
 
   function addCard({ signal }) {
-    console.log();
     const newCard = {
       front: formData.front,
       back: formData.back,
