@@ -3,8 +3,8 @@ import { Route, Switch, useRouteMatch } from "react-router-dom";
 import DeckView from "./DeckView";
 import StudyDeck from "./StudyDeck";
 import EditDeck from "./EditDeck";
-import NewCard from "./NewCard";
 import Cards from "./Cards";
+import { readDeck } from "../../utils/api";
 
 function Deck({ decks, setDecks }) {
   const {
@@ -13,13 +13,32 @@ function Deck({ decks, setDecks }) {
   } = useRouteMatch();
 
   //deck is a state variable that stores the current deck Object
-  const [deck, setDeck] = useState({});
+  const [deck, setDeck] = useState([]);
 
+  //Loads the current Deck from the API on startup
+  useEffect(() => {
+    const controller = new AbortController(); //to abort old requests
+
+    //API call to {API_BASE_URL}/decks/deckId/?_embed=cards (All cards embedded in the deck)
+    async function loadDeck() {
+      readDeck(deckId, controller.signal)
+        .then(setDeck)
+        .catch((error) => {
+          if (error.name !== "AbortError") throw error;
+        });
+    }
+
+    loadDeck();
+    return () => controller.abort(); //cleanup
+  }, [deckId]);
+
+  /************************************    A more efficient useEffect that has fewer API calls      *************************************
+   * 
   //Update deck whenever there is a change to the deckId in the url, or to the parent component's decks array
   useEffect(() => {
     setDeck(decks?.find((deck) => deck.id === Number(deckId))); //defines the current deck object based on the deckId param in the url
   }, [deckId, decks]);
-
+******************************************************************************************************************************************/
   return (
     <>
       <Switch>
@@ -29,10 +48,6 @@ function Deck({ decks, setDecks }) {
 
         <Route path={`${path}/edit`}>
           <EditDeck deck={deck} setDecks={setDecks} />
-        </Route>
-
-        <Route path={`${path}/new`}>
-          <NewCard deck={deck} setDecks={setDecks} />
         </Route>
 
         <Route path={`${path}/cards`}>
