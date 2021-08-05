@@ -8,7 +8,7 @@ function DeckListItem({ deck, setDecks }) {
     <div className="card">
       <div className="card-body">
         <h2 className="card-title">{deck.name}</h2>
-        <p className="card-subtitle">{deck.cards.length} cards</p>
+        <p className="card-subtitle text-muted">{deck.cards.length} cards</p>
         <p className="card-text">{deck.description}</p>
         <ViewDeckBtn path={`/decks/${deck.id}`} />
         <StudyButton path={`/decks/${deck.id}`} />
