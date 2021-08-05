@@ -1,31 +1,33 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import Breadcrumb from "../../CommonComponents/Breadcrumb";
 import LoadingMessage from "../../CommonComponents/LoadingMessage";
-import { listCards } from "../../utils/api";
+import { readDeck } from "../../utils/api";
 import NotEnoughCards from "./NotEnoughCards";
 import StudyCard from "./StudyCard";
 
-function StudyDeck({ deck }) {
-  const [cards, setCards] = useState([]);
-
-  //Loads the list of cards in current deck from the API on startup
+function StudyDeck() {
+  const { deckId } = useParams();
+  const [deck, setDeck] = useState({});
+  const cards = deck.cards;
+  //Loads the current deck from the API whenever deckId or cards changes
   useEffect(() => {
     const controller = new AbortController(); //to abort old requests
 
-    //API call to {API_BASE_URL}/decks/deckId/?_embed=cards (All cards embedded in the deck)
+    //API call to /decks/{deckId}?_embed=cards (All cards embedded in the deck)
     async function loadCards() {
-      listCards(deck?.id, controller.signal)
-        .then(setCards)
+      readDeck(deckId, controller.signal)
+        .then(setDeck)
         .catch((error) => {
           if (error.name !== "AbortError") throw error;
         });
     }
 
-    loadCards();
+    if (!cards) loadCards(); //if there are no cards, load 'em up
     return () => controller.abort(); //cleanup
-  }, [deck]);
+  }, [deckId, cards]);
 
-  return cards && cards?.length ? (
+  return cards ? (
     <>
       <Breadcrumb navTitles={[deck?.name, "Study"]} />
       <h1>Study: {deck?.name}</h1>
