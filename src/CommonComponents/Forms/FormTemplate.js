@@ -23,6 +23,8 @@ function FormTemplate({
     params: { deckId },
   } = useRouteMatch();
 
+  const deckViewURL = url.split("/").slice(0, 3).join("/");
+
   //Only add the Deck Name to the heading if the component is given a deckName prop
   const deckHeading = deckName ? `${deckName}: ` : null;
 
@@ -108,13 +110,32 @@ function FormTemplate({
       })
       .then(() => {
         setFormData(defaultFormState);
-        history.push(""); //this needs to change to deckView
+        /**
+         *      After Save/Submit
+         * Adding new Deck goes to DeckView
+         * Editing new Deck goes to DeckView
+         *
+         * Adding new card goes nowhere
+         * Editing new card goes to DeckView
+         */
+        if (objType !== "Card" && modifyType !== "Add")
+          history.push(deckViewURL);
       });
   }
 
+  /**
+   *        On Cancel/Done
+   *
+   * Adding new Deck goes Home
+   *
+   * Editing old Deck goes to DeckView
+   * Adding new card goes to DeckView
+   * Editing old card goes to DeckView
+   */
   const cancelHandler = () => {
     setFormData(defaultFormState);
-    history.push(""); //this needs to change to deckView
+    if (objType === "Deck" && modifyType === "Add") history.push("");
+    else history.push(deckViewURL);
   };
 
   return (
