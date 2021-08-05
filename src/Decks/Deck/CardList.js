@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import CardListItem from "./CardListItem";
 
-function CardList({ cards, setCards }) {
+function CardList({ cards, setDecks }) {
   //useState variable to store an array of CardListItem components
   const [cardList, setCardList] = useState([]);
 
@@ -10,10 +10,10 @@ function CardList({ cards, setCards }) {
     //map through every card in cards to create a CardListItem for each.
     setCardList(
       cards?.map((card, key) => (
-        <CardListItem key={key} card={card} setCards={setCards} />
+        <CardListItem key={key} card={card} setDecks={setDecks} />
       ))
     );
-  }, [cards, setCards]);
+  }, [cards, setDecks]);
 
   //Parent component DeckView is handling the LoadingMessage, so just return the list
   return <>{cardList}</>;

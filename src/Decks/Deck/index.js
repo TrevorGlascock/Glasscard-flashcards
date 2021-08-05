@@ -13,7 +13,9 @@ function Deck({ decks, setDecks }) {
   } = useRouteMatch();
 
   //deck is a state variable that stores the current deck Object
-  const [deck, setDeck] = useState({});
+  const [deck, setDeck] = useState(
+    decks?.find((deck) => deck.id === Number(deckId)) //defines the current deck object based on the deckId param in the url
+  );
 
   //Update deck whenever there is a change to the deckId in the url, or to the parent component's decks array
   useEffect(() => {

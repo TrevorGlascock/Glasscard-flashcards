@@ -1,8 +1,8 @@
 import React from "react";
 import { useHistory, useParams } from "react-router-dom";
-import { deleteCard, deleteDeck, listCards, listDecks } from "../../utils/api";
+import { deleteCard, deleteDeck, listDecks } from "../../utils/api";
 
-function DeleteButton({ objToDelete, objType, setObjState }) {
+function DeleteButton({ objToDelete, objType, setDecks }) {
   const history = useHistory();
   const { deckId } = useParams();
   //Event Handler to Delete specefied object
@@ -19,7 +19,7 @@ function DeleteButton({ objToDelete, objType, setObjState }) {
             .then(() => updateDecks(controller))
             .then(() => history.push(""))
         : deleteCard(objToDelete.id) //deleteCard if it's a Card
-            .then(() => updateCards(controller));
+            .then(() => updateDecks(controller));
       //.then(() => history.push(""));
     }
     //if we cancel, then go home without deleting
@@ -28,15 +28,7 @@ function DeleteButton({ objToDelete, objType, setObjState }) {
 
   function updateDecks({ signal }) {
     listDecks(signal)
-      .then(setObjState)
-      .catch((error) => {
-        if (error.name !== "AbortError") throw error;
-      });
-  }
-
-  function updateCards({ signal }) {
-    listCards(deckId, signal)
-      .then(setObjState)
+      .then(setDecks)
       .catch((error) => {
         if (error.name !== "AbortError") throw error;
       });
