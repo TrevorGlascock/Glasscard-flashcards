@@ -26,7 +26,7 @@ function DeckView({ deck, setDecks }) {
       <div>
         <EditButton path={url} />
         <StudyButton path={url} />
-        <AddCardButton path={url} />
+        <AddCardButton />
         <DeleteButton
           objToDelete={deck}
           objType={"deck"}

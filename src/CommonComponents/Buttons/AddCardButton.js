@@ -1,7 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useRouteMatch } from "react-router-dom";
 
-function AddCardButton({ path }) {
+function AddCardButton() {
+  const { url } = useRouteMatch();
+  const path = url.split("/").slice(0, 3).join("/");
   return (
     <>
       <Link className="mx-1" to={`${path}/new`}>
