@@ -14,6 +14,7 @@ function FormTemplate({
   objType,
   modifyType,
   deckName,
+  decks,
   setDecks,
 }) {
   //For the event handlers to navigate
@@ -117,9 +118,19 @@ function FormTemplate({
          *
          * Adding new card goes nowhere
          * Editing new card goes to DeckView
+         *
+         *  THIS IS REQUIRES SOME SERIOUS REFACTORING!!
          */
-        if (objType !== "Card" || modifyType !== "Add")
-          history.push(deckViewURL);
+        if (objType === "Card" && modifyType === "Add") return;
+        if (!deckId)
+          history.push(
+            deckViewURL
+              .split("/")
+              .slice(0, 2)
+              .join("/")
+              .concat(`/${decks[decks.length - 1].id + 1}`)
+          );
+        else history.push(deckViewURL);
       });
   }
 
