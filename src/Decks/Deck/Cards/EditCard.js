@@ -7,7 +7,6 @@ function EditCard({ deck, setDecks }) {
   const { cardId } = useParams();
   const card = deck?.cards?.find((card) => card.id === Number(cardId));
 
-  //TODO make api call to get the card from the database instead of using a passed down card
   return card ? (
     <>
       <Breadcrumb navTitles={[deck.name, `Edit Card ${card.id}`]} />
