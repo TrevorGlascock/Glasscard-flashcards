@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useHistory, useRouteMatch } from "react-router-dom";
-import EditCard from "../../Decks/Deck/Cards/EditCard";
-import { createCard, createDeck, listDecks } from "../../utils/api";
+import { createCard, createDeck, listDecks, updateDeck } from "../../utils/api";
 import FormField from "./FormField";
 
 function FormTemplate({
@@ -60,11 +59,12 @@ function FormTemplate({
   };
 
   function editDeck({ signal }) {
-    console.log({
+    const newDeck = {
       ...objToModify,
       name: formData.name,
       description: formData.description,
-    });
+    };
+    updateDeck(newDeck, signal).then(() => updateDecks(signal));
   }
   function editCard({ signal }) {
     console.log({ ...objToModify, front: formData.front, back: formData.back });
