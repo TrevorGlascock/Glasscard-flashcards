@@ -20,7 +20,7 @@ function DeckList({ decks, setDecks }) {
   //If there is a deckList, and it has a non-zero length, render it, otherwise show LoadingMessage
   return deckList?.length ? (
     <>
-      <CreateDeckBtn setDecks={setDecks} />
+      <CreateDeckBtn />
       {deckList}
     </>
   ) : (

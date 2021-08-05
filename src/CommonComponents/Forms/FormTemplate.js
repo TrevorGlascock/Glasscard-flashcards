@@ -1,10 +1,27 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useRouteMatch } from "react-router-dom";
+import {
+  createCard,
+  createDeck,
+  listDecks,
+  updateCard,
+  updateDeck,
+} from "../../utils/api";
 import FormField from "./FormField";
 
-function FormTemplate({ objToModify, objType, modifyType, deckName }) {
+function FormTemplate({
+  objToModify,
+  objType,
+  modifyType,
+  deckName,
+  setDecks,
+}) {
   //For the event handlers to navigate
   const history = useHistory();
+  const {
+    url,
+    params: { deckId },
+  } = useRouteMatch();
 
   //Only add the Deck Name to the heading if the component is given a deckName prop
   const deckHeading = deckName ? `${deckName}: ` : null;
@@ -43,40 +60,59 @@ function FormTemplate({ objToModify, objType, modifyType, deckName }) {
 
   const editSubmitHandler = (event) => {
     event.preventDefault();
-    console.log(
-      `Change this ${objType} from\n`,
-      objToModify,
-      `\nto:\n`,
-      objType === "Deck"
-        ? {
-            ...objToModify,
-            name: formData.name,
-            description: formData.description,
-          }
-        : { ...objToModify, front: formData.front, back: formData.back }
-    );
-    setFormData(defaultFormState);
-    history.push(""); //This needs to change to deckView
+    const controller = new AbortController();
+    objType === "Deck" ? editDeck(controller) : editCard(controller);
   };
+
+  function editDeck({ signal }) {
+    const newDeck = {
+      ...objToModify,
+      name: formData.name,
+      description: formData.description,
+    };
+    updateDeck(newDeck, signal).then(() => updateDecks(signal));
+  }
+  function editCard({ signal }) {
+    const newCard = {
+      ...objToModify,
+      front: formData.front,
+      back: formData.back,
+    };
+    updateCard(newCard, signal).then(() => updateDecks(signal));
+  }
 
   const addSubmitHandler = (event) => {
     event.preventDefault();
-    console.log(
-      `Add the following new ${objType}:\n`,
-      objType === "Deck"
-        ? {
-            ...objToModify,
-            name: formData.name,
-            description: formData.description,
-          }
-        : { ...objToModify, front: formData.front, back: formData.back }
-    );
-    setFormData(defaultFormState);
-    history.push(""); //This needs to change to deckView
+    const controller = new AbortController();
+    objType === "Deck" ? addDeck(controller) : addCard(controller);
   };
 
+  function addDeck({ signal }) {
+    const newDeck = { name: formData.name, description: formData.description };
+    createDeck(newDeck, signal).then(() => updateDecks(signal));
+  }
+
+  function addCard({ signal }) {
+    const newCard = {
+      front: formData.front,
+      back: formData.back,
+    };
+    createCard(deckId, newCard, signal).then(() => updateDecks(signal));
+  }
+
+  function updateDecks(signal) {
+    listDecks(signal)
+      .then(setDecks)
+      .catch((error) => {
+        if (error.name !== "AbortError") throw error;
+      })
+      .then(() => {
+        setFormData(defaultFormState);
+        history.push(""); //this needs to change to deckView
+      });
+  }
+
   const cancelHandler = () => {
-    console.log(objToModify);
     setFormData(defaultFormState);
     history.push(""); //this needs to change to deckView
   };

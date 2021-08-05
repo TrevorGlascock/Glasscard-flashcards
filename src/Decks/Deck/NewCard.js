@@ -3,7 +3,7 @@ import Breadcrumb from "../../CommonComponents/Breadcrumb";
 import FormTemplate from "../../CommonComponents/Forms/FormTemplate";
 import LoadingMessage from "../../CommonComponents/LoadingMessage";
 
-function NewCard({ deck }) {
+function NewCard({ deck, setDecks }) {
   return deck?.id ? (
     <>
       <Breadcrumb navTitles={[deck.name, "Add Card"]} />
@@ -12,6 +12,7 @@ function NewCard({ deck }) {
         objType="Card"
         modifyType="Add"
         deckName={deck.name}
+        setDecks={setDecks}
       />
     </>
   ) : (
