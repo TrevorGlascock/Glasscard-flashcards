@@ -3,7 +3,7 @@ import { Route, Switch, useRouteMatch } from "react-router-dom";
 import DeckView from "./DeckView";
 import StudyDeck from "./StudyDeck";
 import EditDeck from "./EditDeck";
-import NewCard from "./NewCard";
+import NewCard from "./Cards/NewCard";
 import Cards from "./Cards";
 import { readDeck } from "../../utils/api";
 
@@ -49,10 +49,6 @@ function Deck({ decks, setDecks }) {
 
         <Route path={`${path}/edit`}>
           <EditDeck deck={deck} setDecks={setDecks} />
-        </Route>
-
-        <Route path={`${path}/new`}>
-          <NewCard deck={deck} setDecks={setDecks} />
         </Route>
 
         <Route path={`${path}/cards`}>
