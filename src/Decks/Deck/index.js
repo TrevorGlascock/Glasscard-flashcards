@@ -28,15 +28,15 @@ function Deck({ decks }) {
         </Route>
 
         <Route path={`${path}/edit`}>
-          <EditDeck deck={deck} />
+          <EditDeck deck={deck} setDeck={setDeck} />
         </Route>
 
         <Route path={`${path}/new`}>
-          <NewCard deck={deck} />
+          <NewCard deck={deck} setDeck={setDeck} />
         </Route>
 
         <Route path={`${path}/cards`}>
-          <Cards deck={deck} />
+          <Cards deck={deck} setDeck={setDeck} />
         </Route>
 
         <Route exact path={path}>
