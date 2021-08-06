@@ -7,7 +7,7 @@ import NotEnoughCards from "./NotEnoughCards";
 import StudyCard from "./StudyCard";
 
 function StudyDeck() {
-  const { deckId } = useParams();
+  const { deckId } = useParams(); //Used to grab the "current" deck
   const [deck, setDeck] = useState({});
   const cards = deck.cards;
   //Loads the current deck from the API whenever deckId or cards changes
