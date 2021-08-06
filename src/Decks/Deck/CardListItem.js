@@ -11,7 +11,7 @@ function CardListItem({ card, setDecks }) {
       <div className="container">
         <div className="row">
           <div className="col">
-            <h4 className="h">Front</h4>
+            <h4 className="h4">Front</h4>
             <p className="">{card.front}</p>
           </div>
           <div className="col">
