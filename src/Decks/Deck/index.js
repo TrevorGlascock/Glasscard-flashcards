@@ -43,7 +43,7 @@ function Deck({ decks, setDecks }) {
     <>
       <Switch>
         <Route path={`${path}/study`}>
-          <StudyDeck deck={deck} />
+          <StudyDeck />
         </Route>
 
         <Route path={`${path}/edit`}>

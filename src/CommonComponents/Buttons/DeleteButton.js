@@ -12,13 +12,17 @@ function DeleteButton({ objToDelete, objType, setDecks }) {
       )
     ) {
       const controller = new AbortController(); //to abort old requests
-      //Distinguish the type of delete
-      objType === "deck"
-        ? deleteDeck(objToDelete.id) //deleteDeck if it's a Deck
-            .then(() => updateDecks(controller))
-            .then(() => history.push(""))
-        : deleteCard(objToDelete.id) //deleteCard if it's a Card
-            .then(() => updateDecks(controller));
+      async function deleteObject() {
+        //Distinguish the type of delete
+        objType === "deck"
+          ? deleteDeck(objToDelete.id) //deleteDeck if it's a Deck
+              .then(() => updateDecks(controller))
+              .then(() => history.push(""))
+          : deleteCard(objToDelete.id) //deleteCard if it's a Card
+              .then(() => updateDecks(controller));
+      }
+      deleteObject();
+      return () => controller.abort(); //cleanup
     }
     //if we cancel, then go home without deleting
     else history.push("");

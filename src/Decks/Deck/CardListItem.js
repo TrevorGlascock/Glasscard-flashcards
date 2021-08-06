@@ -12,7 +12,7 @@ function CardListItem({ card, setDecks }) {
         <p className="card-text">{card.front}</p>
         <p className="card-text">{card.back}</p>
         <EditButton path={`${url}/cards/${card.id}`} />
-        <DeleteButton objToDelete={card} objType={"card"} setDecks={setDecks} />
+        <DeleteButton objToDelete={card} objType="card" setDecks={setDecks} />
       </div>
     </div>
   );
