@@ -5,14 +5,36 @@ import ViewDeckBtn from "../CommonComponents/Buttons/ViewDeckBtn";
 
 function DeckListItem({ deck, setDecks }) {
   return (
-    <div className="card">
-      <div className="card-body">
-        <h2 className="card-title">{deck.name}</h2>
-        <p className="card-subtitle text-muted">{deck.cards.length} cards</p>
-        <p className="card-text">{deck.description}</p>
-        <ViewDeckBtn path={`/decks/${deck.id}`} />
-        <StudyButton path={`/decks/${deck.id}`} />
-        <DeleteButton objToDelete={deck} objType={"deck"} setDecks={setDecks} />
+    <div className="list-group-item list-group-item-action container">
+      <div className="row">
+        <div className="col-10">
+          <h2 className="h2">{deck.name}</h2>
+        </div>
+        <div className="col">
+          <p className="text-muted">{deck.cards.length} cards</p>
+        </div>
+      </div>
+
+      <div className="row">
+        <div className="col">
+          <p className="">{deck.description}</p>
+        </div>
+      </div>
+
+      <div className="row justify-content-start">
+        <div className="col-8 align-self-start">
+          <ViewDeckBtn path={`/decks/${deck.id}`} />
+
+          <StudyButton path={`/decks/${deck.id}`} />
+        </div>
+
+        <div className="col align-self-end">
+          <DeleteButton
+            objToDelete={deck}
+            objType={"deck"}
+            setDecks={setDecks}
+          />
+        </div>
       </div>
     </div>
   );
