@@ -32,18 +32,11 @@ function Deck({ decks, setDecks }) {
     return () => controller.abort(); //cleanup
   }, [deckId, decks]);
 
-  /************************************    A more efficient useEffect that has fewer API calls      *************************************
-   * 
-  //Update deck whenever there is a change to the deckId in the url, or to the parent component's decks array
-  useEffect(() => {
-    setDeck(decks?.find((deck) => deck.id === Number(deckId))); //defines the current deck object based on the deckId param in the url
-  }, [deckId, decks]);
-******************************************************************************************************************************************/
   return (
     <>
       <Switch>
         <Route path={`${path}/study`}>
-          <StudyDeck deck={deck} />
+          <StudyDeck />
         </Route>
 
         <Route path={`${path}/edit`}>
