@@ -5,7 +5,7 @@ import ViewDeckBtn from "../CommonComponents/Buttons/ViewDeckBtn";
 
 function DeckListItem({ deck, setDecks }) {
   return (
-    <div className="list-group-item list-group-item-action container">
+    <div className="list-group-item">
       <div className="row">
         <div className="col-10">
           <h2 className="h2">{deck.name}</h2>

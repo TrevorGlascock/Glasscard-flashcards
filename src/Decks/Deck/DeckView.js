@@ -22,36 +22,24 @@ function DeckView({ deck, setDecks }) {
   return deck?.name && cards ? (
     <>
       <Breadcrumb navTitles={[deck.name]} />
-      <div className="container">
-        <div className="row">
-          <h2>{deck.name}</h2>
-        </div>
 
-        <div className="row">
-          <p className="">{deck.description}</p>
-        </div>
+      <h2 className="h2 tg-text-light">{deck.name}</h2>
+      <p className="tg-text-light">{deck.description}</p>
 
-        <div className="row justify-content-between mb-5">
-          <div>
-            <EditButton path={url} />
-            <StudyButton path={url} />
-            <AddCardButton />{" "}
-          </div>
-          <div>
-            <DeleteButton
-              objToDelete={deck}
-              objType="deck"
-              setDecks={setDecks}
-            />
-          </div>
+      <div className="row justify-content-between mb-5 px-3">
+        <div>
+          <EditButton path={url} />
+          <StudyButton path={url} />
+          <AddCardButton />
         </div>
-
-        <div className="row">
-          <h2>Cards</h2>
+        <div>
+          <DeleteButton objToDelete={deck} objType="deck" setDecks={setDecks} />
         </div>
-
-        <CardList cards={cards} setDecks={setDecks} />
       </div>
+
+      <h2 className="h2 tg-text-light">Cards</h2>
+
+      <CardList cards={cards} setDecks={setDecks} />
     </>
   ) : (
     <LoadingMessage />
