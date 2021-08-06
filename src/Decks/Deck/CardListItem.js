@@ -7,26 +7,20 @@ import EditButton from "../../CommonComponents/Buttons/EditButton";
 function CardListItem({ card, setDecks }) {
   const { url } = useRouteMatch(); //Grab the url for the EditButton's path
   return (
-    <div className="card">
-      <div className="card-body">
-        <div className="container">
-          <div className="row">
-            <div className="col">
-              <p className="card-text ">{card.front}</p>
-            </div>
+    <div className="list-group-item list-group-item-action">
+      <div className="container">
+        <div className="row">
+          <div className="col">
+            <p className="">{card.front}</p>
+          </div>
 
-            <div className="col">
-              <p className="card-text">{card.back}</p>
-            </div>
+          <div className="col">
+            <p className="">{card.back}</p>
           </div>
-          <div className="row justify-content-end">
-            <EditButton path={`${url}/cards/${card.id}`} />
-            <DeleteButton
-              objToDelete={card}
-              objType="card"
-              setDecks={setDecks}
-            />
-          </div>
+        </div>
+        <div className="row justify-content-end">
+          <EditButton path={`${url}/cards/${card.id}`} />
+          <DeleteButton objToDelete={card} objType="card" setDecks={setDecks} />
         </div>
       </div>
     </div>
