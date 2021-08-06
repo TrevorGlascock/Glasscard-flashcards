@@ -12,11 +12,7 @@ function DeckListItem({ deck, setDecks }) {
         <p className="card-text">{deck.description}</p>
         <ViewDeckBtn path={`/decks/${deck.id}`} />
         <StudyButton path={`/decks/${deck.id}`} />
-        <DeleteButton
-          objToDelete={deck}
-          objType={"deck"}
-          setObjState={setDecks}
-        />
+        <DeleteButton objToDelete={deck} objType={"deck"} setDecks={setDecks} />
       </div>
     </div>
   );
