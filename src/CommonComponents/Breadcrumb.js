@@ -1,7 +1,6 @@
 import React from "react";
 import { Link, useRouteMatch } from "react-router-dom";
 
-
 function Breadcrumb({ navTitles }) {
   const { url } = useRouteMatch();
 
@@ -30,6 +29,8 @@ function Breadcrumb({ navTitles }) {
         );
       })
     : navTitles;
+
+  //The first navLink will always be a link to HomePage
   return (
     <nav aria-label="breadcrumb">
       <ol className="breadcrumb">
