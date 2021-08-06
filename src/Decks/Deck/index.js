@@ -30,7 +30,7 @@ function Deck({ decks, setDecks }) {
 
     loadDeck();
     return () => controller.abort(); //cleanup
-  }, [deckId]);
+  }, [deckId, decks]);
 
   /************************************    A more efficient useEffect that has fewer API calls      *************************************
    * 

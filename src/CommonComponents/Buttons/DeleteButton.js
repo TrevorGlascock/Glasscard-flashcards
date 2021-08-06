@@ -19,7 +19,6 @@ function DeleteButton({ objToDelete, objType, setDecks }) {
             .then(() => history.push(""))
         : deleteCard(objToDelete.id) //deleteCard if it's a Card
             .then(() => updateDecks(controller));
-      //.then(() => history.push(""));
     }
     //if we cancel, then go home without deleting
     else history.push("");
