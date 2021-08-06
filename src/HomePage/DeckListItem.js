@@ -26,7 +26,13 @@ function DeckListItem({ deck, setDecks }) {
           <ViewDeckBtn path={`/decks/${deck.id}`} />
           <StudyButton path={`/decks/${deck.id}`} />
         </div>
-        <DeleteButton objToDelete={deck} objType={"deck"} setDecks={setDecks} />
+        <div>
+          <DeleteButton
+            objToDelete={deck}
+            objType={"deck"}
+            setDecks={setDecks}
+          />
+        </div>
       </div>
     </div>
   );

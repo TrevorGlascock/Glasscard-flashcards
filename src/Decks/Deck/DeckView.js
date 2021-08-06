@@ -26,22 +26,31 @@ function DeckView({ deck, setDecks }) {
         <div className="row">
           <h2>{deck.name}</h2>
         </div>
+
         <div className="row">
           <p className="">{deck.description}</p>
         </div>
-        <div className="row justify-content-between">
+
+        <div className="row justify-content-between mb-5">
           <div>
             <EditButton path={url} />
             <StudyButton path={url} />
             <AddCardButton />{" "}
           </div>
-          <DeleteButton objToDelete={deck} objType="deck" setDecks={setDecks} />
+          <div>
+            <DeleteButton
+              objToDelete={deck}
+              objType="deck"
+              setDecks={setDecks}
+            />
+          </div>
         </div>
-        <hr />
+
         <div className="row">
           <h2>Cards</h2>
-          <CardList cards={cards} setDecks={setDecks} />
         </div>
+
+        <CardList cards={cards} setDecks={setDecks} />
       </div>
     </>
   ) : (
