@@ -9,10 +9,25 @@ function CardListItem({ card, setDecks }) {
   return (
     <div className="card">
       <div className="card-body">
-        <p className="card-text">{card.front}</p>
-        <p className="card-text">{card.back}</p>
-        <EditButton path={`${url}/cards/${card.id}`} />
-        <DeleteButton objToDelete={card} objType="card" setDecks={setDecks} />
+        <div className="container">
+          <div className="row mb-4">
+            <div className="col">
+              <p className="card-text ">{card.front}</p>
+            </div>
+
+            <div className="col">
+              <p className="card-text">{card.back}</p>
+            </div>
+          </div>
+          <div className="row">
+            <EditButton path={`${url}/cards/${card.id}`} />
+            <DeleteButton
+              objToDelete={card}
+              objType="card"
+              setDecks={setDecks}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );
