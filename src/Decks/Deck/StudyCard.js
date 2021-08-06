@@ -50,12 +50,12 @@ function StudyCard({ cards }) {
             ? cards[studyState.index].back
             : cards[studyState.index].front}
         </p>
-        <button className="btn btn-secondary mr-2" onClick={flipHandler}>
+        <button className="btn btn-secondary mr-3" onClick={flipHandler}>
           Flip
         </button>
         {/* Next button only appears if it's not a freshView of the card */}
         {studyState.freshView ? null : (
-          <button className="btn btn-primary mr-2" onClick={nextHandler}>
+          <button className="btn btn-primary mr-3" onClick={nextHandler}>
             Next
           </button>
         )}
