@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 function StudyButton({ path }) {
   return (
     <>
-      <Link className="mx-1" to={`${path}/study`}>
+      <Link className="mr-3" to={`${path}/study`}>
         <button className="btn btn-primary">
           <span
-            className="oi oi-book pr-2"
+            className="oi oi-book pr-1"
             title="book"
             aria-hidden="true"
           ></span>

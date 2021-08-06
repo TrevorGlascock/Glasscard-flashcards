@@ -6,6 +6,7 @@ function FormField({ inputType, name, value, placeholder, formChangeHandler }) {
   return (
     <div className="form-group">
       <label htmlFor={name}>{lableTitle}</label>
+      {/*If the inputType is a text area...*/}
       {inputType === "textarea" ? (
         <textarea
           className="form-control"
@@ -18,6 +19,7 @@ function FormField({ inputType, name, value, placeholder, formChangeHandler }) {
           required
         />
       ) : (
+        /*Else, we are assuming the inputType is text*/
         <input
           className="form-control"
           id={name}

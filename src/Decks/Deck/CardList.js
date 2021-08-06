@@ -16,7 +16,7 @@ function CardList({ cards, setDecks }) {
   }, [cards, setDecks]);
 
   //Parent component DeckView is handling the LoadingMessage, so just return the list
-  return <>{cardList}</>;
+  return <div className="list-group">{cardList}</div>;
 }
 
 export default CardList;

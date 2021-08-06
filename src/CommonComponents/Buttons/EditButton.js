@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 function EditButton({ path }) {
   return (
     <>
-      <Link className="mx-1" to={`${path}/edit`}>
+      <Link className="mr-3" to={`${path}/edit`}>
         <button className="btn btn-secondary">
           <span
-            className="oi oi-pencil pr-2"
+            className="oi oi-pencil pr-1"
             title="pencil"
             aria-hidden="true"
           ></span>

@@ -6,7 +6,7 @@ function AddCardButton() {
   const path = url.split("/").slice(0, 3).join("/");
   return (
     <>
-      <Link className="mx-1" to={`${path}/cards/new`}>
+      <Link className="mr-3" to={`${path}/cards/new`}>
         <button className="btn btn-primary">
           <span
             className="oi oi-plus pr-2"

@@ -21,7 +21,7 @@ function DeckList({ decks, setDecks }) {
   return deckList?.length ? (
     <>
       <CreateDeckBtn />
-      {deckList}
+      <div className="list-group">{deckList}</div>
     </>
   ) : (
     <LoadingMessage />

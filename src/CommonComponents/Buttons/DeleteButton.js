@@ -37,9 +37,9 @@ function DeleteButton({ objToDelete, objType, setDecks }) {
   }
 
   return (
-    <button className="btn btn-danger mx-1" onClick={() => handleDelete()}>
+    <button className="btn btn-danger" onClick={() => handleDelete()}>
       <span
-        className="oi oi-trash pr-2"
+        className="oi oi-trash pr-1"
         title="trash"
         aria-hidden="true"
       ></span>
