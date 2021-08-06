@@ -38,7 +38,7 @@ function StudyCard({ cards }) {
   }
 
   return (
-    <div className="card">
+    <div className="card tg-bg-light">
       <div className="card-body">
         <h2 className="card-title">
           {/*Shows user how far into the studySession they are */}
