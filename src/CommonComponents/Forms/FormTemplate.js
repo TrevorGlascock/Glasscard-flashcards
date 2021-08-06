@@ -24,6 +24,7 @@ function FormTemplate({
     params: { deckId },
   } = useRouteMatch();
 
+  //deckView is always the first three segments of the url
   const deckViewURL = url.split("/").slice(0, 3).join("/");
 
   //Only add the Deck Name to the heading if the component is given a deckName prop
@@ -52,8 +53,10 @@ function FormTemplate({
       ? { name: objToModify.name, description: objToModify.description } //Deck name & Description for Deck
       : { front: objToModify.front, back: objToModify.back }; //Card front & back for Card
 
+  //State control Object that holds key value pair corresponding to each forms input variables
   const [formData, setFormData] = useState(defaultFormState);
 
+  //Changes the formData Object to be a copy of the existing object, but overrides the name key to be the value user inputted
   const formChangeHandler = ({ target: { name, value } }) => {
     setFormData({
       ...formData,
@@ -61,82 +64,9 @@ function FormTemplate({
     });
   };
 
-  const editSubmitHandler = (event) => {
-    event.preventDefault();
-    const controller = new AbortController();
-    objType === "Deck" ? editDeck(controller) : editCard(controller);
-  };
-
-  function editDeck({ signal }) {
-    const newDeck = {
-      ...objToModify,
-      name: formData.name,
-      description: formData.description,
-    };
-    updateDeck(newDeck, signal).then(() => updateDecks(signal));
-  }
-  function editCard({ signal }) {
-    const newCard = {
-      ...objToModify,
-      front: formData.front,
-      back: formData.back,
-    };
-    updateCard(newCard, signal).then(() => updateDecks(signal));
-  }
-
-  const addSubmitHandler = (event) => {
-    event.preventDefault();
-    const controller = new AbortController();
-    objType === "Deck" ? addDeck(controller) : addCard(controller);
-  };
-
-  function addDeck({ signal }) {
-    const newDeck = { name: formData.name, description: formData.description };
-    createDeck(newDeck, signal).then(() => updateDecks(signal));
-  }
-
-  function addCard({ signal }) {
-    const newCard = {
-      front: formData.front,
-      back: formData.back,
-    };
-    createCard(deckId, newCard, signal).then(() => updateDecks(signal));
-  }
-
-  function updateDecks(signal) {
-    listDecks(signal)
-      .then(setDecks)
-      .catch((error) => {
-        if (error.name !== "AbortError") throw error;
-      })
-      .then(() => {
-        setFormData(defaultFormState);
-        /**
-         *      After Save/Submit
-         * Adding new Deck goes to DeckView
-         * Editing new Deck goes to DeckView
-         *
-         * Adding new card goes nowhere
-         * Editing new card goes to DeckView
-         *
-         *  THIS IS REQUIRES SOME SERIOUS REFACTORING!!
-         */
-        if (objType === "Card" && modifyType === "Add") return;
-        if (!deckId)
-          history.push(
-            deckViewURL
-              .split("/")
-              .slice(0, 2)
-              .join("/")
-              .concat(`/${decks[decks.length - 1].id + 1}`)
-          );
-        else history.push(deckViewURL);
-      });
-  }
-
-  /**
-   *        On Cancel/Done
-   *
+  /************************************************************
+   * * * * * * * * * * CANCEL EVENT HANDLER * * * * * * * * * *
+   ************************************************************
    * Adding new Deck goes Home
    *
    * Editing old Deck goes to DeckView
@@ -148,6 +78,104 @@ function FormTemplate({
     if (objType === "Deck" && modifyType === "Add") history.push("");
     else history.push(deckViewURL);
   };
+
+  /*********************************************************************
+   * * * * * * * * * * SUBMIT EVENT HANDLER VARIANTS * * * * * * * * * *
+   *********************************************************************
+
+  /***************************
+   * * * * * EDITING * * * * *
+   ***************************/
+  //If editing, we need to make the updateXXX utility API call.
+  const editSubmitHandler = (event) => {
+    event.preventDefault();
+    const controller = new AbortController();
+    //objType determines if we are editing a Deck or a Card
+    objType === "Deck" ? editDeck(controller) : editCard(controller);
+  };
+
+  //Editing Deck requires name and description key, as well as the updateDeck utility API call
+  function editDeck({ signal }) {
+    const newDeck = {
+      ...objToModify,
+      name: formData.name,
+      description: formData.description,
+    };
+    updateDeck(newDeck, signal).then(() => updateDecks(signal));
+  }
+
+  //Editing Card requires front and back key, as well as the updateCard utility API call
+  function editCard({ signal }) {
+    const newCard = {
+      ...objToModify,
+      front: formData.front,
+      back: formData.back,
+    };
+    updateCard(newCard, signal).then(() => updateDecks(signal));
+  }
+
+  /***************************
+   * * * * * ADDING * * * * *
+   ***************************/
+  //If adding, we need to make the createXXX utility API call.
+  const addSubmitHandler = (event) => {
+    event.preventDefault();
+    const controller = new AbortController();
+    //objType determines if we are adding a Deck or a Card
+    objType === "Deck" ? addDeck(controller) : addCard(controller);
+  };
+
+  //Adding Deck requires name and description key, as well as the createDeck utility API call
+  function addDeck({ signal }) {
+    const newDeck = { name: formData.name, description: formData.description };
+    createDeck(newDeck, signal).then(() => updateDecks(signal));
+  }
+
+  //Adding Card requires front and back key, as well as the createDeck utility API call
+  function addCard({ signal }) {
+    const newCard = {
+      front: formData.front,
+      back: formData.back,
+    };
+    createCard(deckId, newCard, signal).then(() => updateDecks(signal));
+  }
+
+  /**********************************************************
+   * * * * * * * * * * UPDATE DECKS STATE * * * * * * * * * *
+   **********************************************************
+  /**
+   * This function is called in every submit handler.
+   * Any time we modify an object,
+   * we need to modify the root decks state variable;
+   * This ensures everything gets re-rendered after requests
+   * */
+  function updateDecks(signal) {
+    listDecks(signal)
+      .then(setDecks)
+      .catch((error) => {
+        if (error.name !== "AbortError") throw error;
+      })
+      .then(() => {
+        //Reset the forms
+        setFormData(defaultFormState);
+
+        //Adding new card goes nowhere
+        if (objType === "Card" && modifyType === "Add") return null;
+
+        //All other formTypes send the user to deckView
+        if (!deckId)
+          //if there is no deckId param, it's because we are adding a deck: {BASE_UR:}/decks/new
+          //so we can just grab the id of the last deck in decks in the place of the deckId param
+          history.push(
+            deckViewURL
+              .split("/")
+              .slice(0, 2)
+              .join("/")
+              .concat(`/${decks[decks.length - 1].id + 1}`)
+          );
+        else history.push(deckViewURL);
+      });
+  }
 
   return (
     <>
