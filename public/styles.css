@@ -1,0 +1,32 @@
+:root {
+  --bg-dark: red;
+  --bg-mid: green;
+  --bg-light: blue;
+  --text-dark: black;
+  --text-mid: grey;
+  --text-light: white;
+}
+
+.bg-dark {
+  background-color: var(--bg-dark);
+}
+
+.bg-mid {
+  background-color: var(--bg-mid);
+}
+
+.bg-light {
+  background-color: var(--bg-light);
+}
+
+.text-dark {
+  color: var(--text-dark);
+}
+
+.text-mid {
+  color: var(--text-mid);
+}
+
+.text-light {
+  color: var(--text-light);
+}
