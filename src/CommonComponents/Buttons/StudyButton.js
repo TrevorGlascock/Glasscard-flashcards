@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 function StudyButton({ path }) {
   return (
     <>
-      <Link className="" to={`${path}/study`}>
+      <Link className="mr-3" to={`${path}/study`}>
         <button className="btn btn-primary">
           <span
             className="oi oi-book pr-1"

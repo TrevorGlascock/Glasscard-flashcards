@@ -21,20 +21,12 @@ function DeckListItem({ deck, setDecks }) {
         </div>
       </div>
 
-      <div className="row justify-content-start">
-        <div className="col-8 align-self-start">
+      <div className="row justify-content-between px-3">
+        <div>
           <ViewDeckBtn path={`/decks/${deck.id}`} />
-
           <StudyButton path={`/decks/${deck.id}`} />
         </div>
-
-        <div className="col align-self-end">
-          <DeleteButton
-            objToDelete={deck}
-            objType={"deck"}
-            setDecks={setDecks}
-          />
-        </div>
+        <DeleteButton objToDelete={deck} objType={"deck"} setDecks={setDecks} />
       </div>
     </div>
   );
