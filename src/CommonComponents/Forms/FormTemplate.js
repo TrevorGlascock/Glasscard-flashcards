@@ -179,7 +179,7 @@ function FormTemplate({
 
   return (
     <>
-      <h1>
+      <h1 className="h1">
         {deckHeading}
         {modifyType} {objType}
       </h1>

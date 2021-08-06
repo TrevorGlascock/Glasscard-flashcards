@@ -8,7 +8,7 @@ function DeckListItem({ deck, setDecks }) {
     <div className="list-group-item">
       <div className="row">
         <div className="col-10">
-          <h2 className="h2">{deck.name}</h2>
+          <h3 className="h3">{deck.name}</h3>
         </div>
         <div className="col">
           <p className="text-muted">{deck.cards.length} cards</p>

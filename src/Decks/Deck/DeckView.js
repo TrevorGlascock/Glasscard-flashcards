@@ -23,7 +23,7 @@ function DeckView({ deck, setDecks }) {
     <>
       <Breadcrumb navTitles={[deck.name]} />
 
-      <h2 className="h2 tg-text-light">{deck.name}</h2>
+      <h2 className="h2">{deck.name}</h2>
       <p className="tg-text-light">{deck.description}</p>
 
       <div className="row justify-content-between mb-5 px-3">
@@ -37,7 +37,7 @@ function DeckView({ deck, setDecks }) {
         </div>
       </div>
 
-      <h2 className="h2 tg-text-light">Cards</h2>
+      <h2 className="h2">Cards</h2>
 
       <CardList cards={cards} setDecks={setDecks} />
     </>

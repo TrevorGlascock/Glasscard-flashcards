@@ -6,6 +6,7 @@
 
   --text-dark: black;
   --text-light: #e0f7ff;
+  --text-mute: #2ec4b6;
 }
 
 .tg-bg-dark {
@@ -20,11 +21,13 @@
   background-color: var(--primary-light);
 }
 
-.tg-text-light {
+.title {
   color: var(--text-light);
 }
 
-.title {
+.h1,
+.h2,
+.tg-text-light {
   color: var(--text-light);
 }
 
@@ -35,6 +38,7 @@
 .list-group-item:hover {
   background-color: var(--primary-light-grey);
 }
+
 .breadcrumb {
   background-color: var(--primary-dark);
 }

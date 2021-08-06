@@ -30,7 +30,7 @@ function StudyDeck() {
   return cards ? (
     <>
       <Breadcrumb navTitles={[deck?.name, "Study"]} />
-      <h1>Study: {deck?.name}</h1>
+      <h1 className="h1">Study: {deck?.name}</h1>
       {cards.length < 3 ? (
         <NotEnoughCards cards={cards} />
       ) : (
