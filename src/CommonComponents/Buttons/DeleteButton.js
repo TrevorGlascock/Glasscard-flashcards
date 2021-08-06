@@ -4,7 +4,7 @@ import { deleteCard, deleteDeck, listDecks } from "../../utils/api";
 
 function DeleteButton({ objToDelete, objType, setDecks }) {
   const history = useHistory();
-  //Event Handler to Delete specefied object
+  //Event Handler to Delete specified object
   function handleDelete() {
     if (
       window.confirm(
