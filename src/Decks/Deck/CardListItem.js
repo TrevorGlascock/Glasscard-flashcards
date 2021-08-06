@@ -10,7 +10,7 @@ function CardListItem({ card, setDecks }) {
     <div className="card">
       <div className="card-body">
         <div className="container">
-          <div className="row mb-4">
+          <div className="row">
             <div className="col">
               <p className="card-text ">{card.front}</p>
             </div>
@@ -19,7 +19,7 @@ function CardListItem({ card, setDecks }) {
               <p className="card-text">{card.back}</p>
             </div>
           </div>
-          <div className="row">
+          <div className="row justify-content-end">
             <EditButton path={`${url}/cards/${card.id}`} />
             <DeleteButton
               objToDelete={card}
