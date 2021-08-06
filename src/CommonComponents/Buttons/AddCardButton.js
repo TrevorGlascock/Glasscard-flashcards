@@ -7,7 +7,7 @@ function AddCardButton() {
   return (
     <>
       <Link className="mr-3" to={`${path}/cards/new`}>
-        <button className="btn btn-primary">
+        <button className="btn btn-info">
           <span
             className="oi oi-plus pr-2"
             title="plus"
