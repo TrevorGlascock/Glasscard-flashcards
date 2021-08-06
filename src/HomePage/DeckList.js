@@ -19,14 +19,14 @@ function DeckList({ decks, setDecks }) {
 
   //If there is a deckList, and it has a non-zero length, render it, otherwise show LoadingMessage
   return deckList?.length ? (
-    <div className="container">
+    <>
       <div className="row">
         <CreateDeckBtn />
       </div>
       <div className="row">
         <div className="list-group">{deckList}</div>
       </div>
-    </div>
+    </>
   ) : (
     <LoadingMessage />
   );
