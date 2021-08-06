@@ -41,3 +41,7 @@
 .breadcrumb {
   background-color: var(--primary-dark);
 }
+
+.jumbotron {
+  border-radius: 0;
+}
