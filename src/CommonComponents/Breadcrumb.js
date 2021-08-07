@@ -12,11 +12,7 @@ function Breadcrumb({ navTitles }) {
         //The last item in the navTitles is rendered differently
         if (index === navTitles.length - 1)
           return (
-            <li
-              key={index}
-              className="breadcrumb-item active"
-              aria-current="page"
-            >
+            <li key={index} className="breadcrumb-item " aria-current="page">
               {title}
             </li>
           );
