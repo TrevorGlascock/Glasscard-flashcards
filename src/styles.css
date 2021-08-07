@@ -6,6 +6,9 @@
 
   --text-dark: #212529;
   --text-light: #e0f7ff;
+
+  --accent-primary: #86fff5;
+  --accent-secondary: #2ec4b6;
 }
 
 .tg-bg-dark {
@@ -44,4 +47,15 @@
 
 .jumbotron {
   border-radius: 0;
+}
+
+a {
+  color: var(--accent-primary);
+}
+a:hover {
+  color: var(--accent-secondary);
+}
+
+li {
+  color: var(--text-light);
 }
