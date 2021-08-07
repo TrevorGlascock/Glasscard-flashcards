@@ -1,0 +1,47 @@
+:root {
+  --primary-dark: #381648;
+  --primary-mid: #7a468e;
+  --primary-light-grey: #bea6d6;
+  --primary-light: #d4c6ee;
+
+  --text-dark: #212529;
+  --text-light: #e0f7ff;
+}
+
+.tg-bg-dark {
+  background-color: var(--primary-dark);
+}
+
+.tg-bg-mid {
+  background-color: var(--primary-mid);
+}
+
+.tg-bg-light {
+  background-color: var(--primary-light);
+}
+
+.title {
+  color: var(--text-light);
+}
+
+.h1,
+.h2,
+.tg-text-light {
+  color: var(--text-light);
+}
+
+.list-group-item {
+  background-color: var(--primary-light);
+}
+
+.list-group-item:hover {
+  background-color: var(--primary-light-grey);
+}
+
+.breadcrumb {
+  background-color: var(--primary-dark);
+}
+
+.jumbotron {
+  border-radius: 0;
+}
