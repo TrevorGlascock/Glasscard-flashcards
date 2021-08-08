@@ -70,6 +70,19 @@ Renders a form for the user to define the selected card's front and back, starti
 
 ![Edit Card Screenshot](https://raw.githubusercontent.com/TrevorGlascock/Project_Flashcards/main/Screenshots/Edit-Card.png)
 
+## Technology
+### Built With:
+- React, and react-router-dom
+  - Created with create-react-app
+- Bootstrap for quick, responive, and consistent styling
+
+### API:
+- in Developer Environment, it's hosted locally with JSON-Server
+- in Production Environment, currently a READ-ONLY version of the database is being hosted by [My JSON Server](https://my-json-server.typicode.com/TrevorGlascock/Project_Flashcards)
+  - This will be replaced with a deployed API soon
+
+### Deployment:
+- Front-End Deployed with Vercel
 
 ## **TODO:**
 - Change the bootstrap buttons to align more with my brand colors.
