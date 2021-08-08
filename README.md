@@ -74,4 +74,5 @@ Renders a form for the user to define the selected card's front and back, starti
 ## **TODO:**
 - Change the bootstrap buttons to align more with my brand colors.
 - Return to this after further exploring backend deployment to make a live demo that isn't read only with a fake API.
+- Once the API part is live, also fix the Github Page's deployment
 - General Feature Additions TBD
